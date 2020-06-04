@@ -18,9 +18,15 @@ export default {
 
 <style lang="scss" scoped>
   .footer-wrapper {
+    @media screen and (max-width: 576px) {
+      @include flex($justify: center, $direction: column);
+    }
     @include flex($justify: center, $align: center);
     height: $footerHeight;
     .link {
+      @media screen and (max-width: 576px) {
+        margin: 0;
+      }
       margin-left: 8px;
       color: #333;
     }

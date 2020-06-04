@@ -96,6 +96,11 @@ export default {
     background-color: #fff;
     box-shadow: 0 2px 8px #f0f1f2;
     .inner {
+      @media screen and (max-width: 576px) {
+        @include flex($justify: space-around, $direction: column);
+        height: 120px;
+        padding: 10px 0;
+      }
       @include flex($justify: space-between, $align: center);
       @include layout;
       height: $headerHeight;

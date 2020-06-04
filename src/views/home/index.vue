@@ -1,64 +1,72 @@
 <template>
   <div class="home">
-    <div class="left-wrapper">
-      <!-- <div class="head-label">
-        <h2>标签分类</h2>
-      </div>
-      <home-tags :tag-list="tagList" @tagClick="getSelectedTag" /> -->
-      <!-- 文章列表 -->
-      <div class="head-label article-title">
-        <h2>全部文章</h2>
-        <a-radio-group @change="handleRadioChange" v-model="radioVal">
-          <a-radio value="latest">最新</a-radio>
-          <a-radio value="hottest">最热</a-radio>
-        </a-radio-group>
-      </div>
-      <fetch-loading ref="fetch">
-        <home-articles v-if="aList.length" :article-list="aList" />
-        <div class="empty" v-else>
-          <a-empty description="暂无数据"/>
+    <a-row :gutter="36">
+      <a-col :lg="18" :md="16">
+        <!-- 标签列表 -->
+        <div class="wrapper-item">
+          <div class="head-label">
+            <h2>标签分类</h2>
+          </div>
+          <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
         </div>
-      </fetch-loading>
-    </div>
 
-    <div class="right-wrapper">
-      <!-- 标签分类 -->
-      <div class="wrapper-item">
-        <div class="head-label">
-          <h2>标签分类</h2>
+        <div class="wrapper-item">
+          <!-- 文章列表 -->
+          <div class="head-label article-title">
+            <h2>全部文章</h2>
+            <a-radio-group @change="handleRadioChange" v-model="radioVal">
+              <a-radio value="latest">最新</a-radio>
+              <a-radio value="hottest">最热</a-radio>
+            </a-radio-group>
+          </div>
+          <fetch-loading ref="fetch">
+            <home-articles v-if="aList.length" :article-list="aList" />
+            <div class="empty" v-else>
+              <a-empty description="暂无数据"/>
+            </div>
+          </fetch-loading>
         </div>
-        <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
-      </div>
-      
-      <!-- 推荐 最新 -->
-      <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
-        <div class="head-label">
-          <h2>{{ item.title }}</h2>
-        </div>
-        <div class="list">
-          <ul>
-            <li v-for="p in (item.label === 'hottest' ? hottest : latest)" :key="p._id">
-              <router-link
-                :to="{ name: 'article', params: { articleId: p._id } }"
-                class="link">
-                {{ p.title }}
-              </router-link>
-              <span class="views df-aic">
-                <a-icon type="eye" :style="{marginRight: '5px'}"/>
-                {{ p.views }}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </a-col>
 
-      <!-- 和我交流 -->
-      <div class="wrapper-item">
-        <div class="head-label">
-          <h2>和我交流</h2>
+      <a-col :lg="6" :md="8">
+        <!-- 标签分类 -->
+        <!-- <div class="wrapper-item">
+          <div class="head-label">
+            <h2>标签分类</h2>
+          </div>
+          <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
+        </div> -->
+        
+        <!-- 推荐 最新 -->
+        <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
+          <div class="head-label">
+            <h2>{{ item.title }}</h2>
+          </div>
+          <div class="list">
+            <ul>
+              <li v-for="p in (item.label === 'hottest' ? hottest : latest)" :key="p._id">
+                <router-link
+                  :to="{ name: 'article', params: { articleId: p._id } }"
+                  class="link">
+                  {{ p.title }}
+                </router-link>
+                <span class="views df-aic">
+                  <a-icon type="eye" :style="{marginRight: '5px'}"/>
+                  {{ p.views }}
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </div>
+
+        <!-- 和我交流 -->
+        <div class="wrapper-item">
+          <div class="head-label">
+            <h2>和我交流</h2>
+          </div>
+        </div>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
@@ -131,6 +139,7 @@ export default {
         handleFn: result => callBack(result)
       })
     },
+    
     /* 文章列表 */
     getList() {
       this.pageSize = 10
@@ -188,58 +197,53 @@ export default {
 <style lang="scss" scoped>
   .home {
     @include flex;
-    .left-wrapper {
-      width: calc(100% - 300px);
-      padding-right: 25px;
-      .article-title {
-        @include flex($justify: space-between, $align: center);
-      }
-    }
-    .right-wrapper {
-      width: 300px;
-      .wrapper-item {
-        margin-bottom: 36px;
-      }
-      .list {
-        // border: 1px solid #eee;
-        border-radius: 2px;
-        padding: 0 10px;
-        ul {
-          li {
-            @include flex($align: center);
-            margin-bottom: 15px;
-            .link {
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-            }
-            .views {
-              margin-left: 10px;
-              color: #999;
-            }
-            &:last-child {
-              margin-bottom: 0;
-            }
-          }
+    .wrapper-item {
+      margin-bottom: 36px;
+      .head-label {
+        position: relative;
+        padding: 0 0 10px 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        line-height: 24px;
+        h2 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: bold;
+        }
+        &:before {
+          content: "#";
+          position: absolute;
+          left: 0;
+          top: 0;
+          font-size: 20px;
         }
       }
     }
-    .head-label {
-      position: relative;
-      padding-left: 15px;
-      margin-bottom: 15px;
-      line-height: 24px;
-      h2 {
-        margin: 0;
-        font-size: 18px;
-        font-weight: bold;
-      }
-      &:before {
-        content: "#";
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: 20px;
+    // .left-wrapper {
+    .article-title {
+      @include flex($justify: space-between, $align: center);
+    }
+    // }
+    .list {
+      border-radius: 2px;
+      padding: 0 10px;
+      ul {
+        li {
+          @include flex($align: center);
+          margin-bottom: 15px;
+          .link {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .views {
+            margin-left: 10px;
+            color: #999;
+          }
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
       }
     }
   }

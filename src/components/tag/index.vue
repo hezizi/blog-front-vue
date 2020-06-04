@@ -60,7 +60,6 @@ export default {
 
 <style lang="scss" scoped>
   .tags-wrapper {
-    margin-bottom: 30px;
     user-select: none;
     ul {
       flex-wrap: wrap;

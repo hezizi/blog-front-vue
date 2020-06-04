@@ -106,8 +106,13 @@ export default {
       margin-bottom: 15px;
     }
     // @include flex;
-    width: 1000px;
-    margin: auto;
+    @media screen and (max-width: 992px) {
+    padding: 0 60px;
+    }
+    @media screen and (max-width: 576px) {
+      padding: 0;
+    }
+    padding: 0 100px;
     .author {
       @include flex($align: center, $direction: column);
       margin-bottom: 30px;

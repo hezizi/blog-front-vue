@@ -27,6 +27,9 @@ export default {
 <style lang="scss" scoped>
   .basic-page {
     main {
+      @media screen and (max-width: 576px) {
+        padding: 150px 15px 30px;
+      }
       @include layout;
       padding: 100px 15px 30px;
       min-height: calc(100% - #{$footerHeight});

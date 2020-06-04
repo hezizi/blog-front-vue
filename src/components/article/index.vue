@@ -1,27 +1,34 @@
 <template>
   <div>
-    <div class="article-item" v-for="item in articleList" :key="item._id">
+    <div class="article-item df" v-for="item in articleList" :key="item._id">
       <router-link
         :to="{ name: 'article', params: { articleId: item._id } }"
         class="link" />
-      <h3 class="title">{{ item.title }}</h3>
-      <div class="tags">
-        <!-- <a-icon type="tags" :style="{marginRight: '5px'}"/> -->
-        <a-tag
-          class="tag"
-          v-for="tag in item.tags"
-          :key="tag._id"
-        >
-          {{ tag.name }}
-        </a-tag>
+      <div class="flex1">
+        <!-- 标题 -->
+        <h3 class="title">{{ item.title }}</h3>
+        <!-- 标签 -->
+        <div class="tags">
+          <a-tag
+            class="tag"
+            v-for="tag in item.tags"
+            :key="tag._id"
+          >
+            {{ tag.name }}
+          </a-tag>
+        </div>
+        <!-- 描述 -->
+        <p class="desc">{{ desc(item) }}</p>
+        <div class="meta df-aic">
+          <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
+          <span><a-icon type="eye" /> {{ item.views }}</span>
+        </div>
       </div>
-      <p class="desc">{{ desc(item) }}</p>
-      <div class="meta df-aic">
-        <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
-        <span><a-icon type="eye" /> {{ item.views }}</span>
-      </div>
-      <div class="img">
-        <img src="https://img-blog.csdnimg.cn/20200406211621706.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1Y2loZW50,size_16,color_FFFFFF,t_70#pic_center" alt="logo">
+      <div class="cover-wrapper df-aic">
+        <!-- 封面 -->
+        <div class="cover">
+          <img :src="coverUrl(item)" class="w100" alt="cover">
+        </div>
       </div>
     </div>
   </div>
@@ -40,19 +47,28 @@ export default {
   },
   computed: {
     desc: () => item => item.desc,
-    createDate: () => item => dateFormat(item.create_time)
+    createDate: () => item => dateFormat(item.create_time),
+    coverUrl: () => item => {
+      return item.cover 
+        ? `http://localhost:5000/upload/${item.cover}`
+        : require('@/assets/images/cover_default.png')
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
   .article-item {
+    @media screen and (max-width: 576px) {
+      height: auto
+    }
+    @include flex($justify: space-between);
     position: relative;
-    margin-bottom: 15px;
-    padding: 10px 190px 10px 10px;
+    margin-bottom: 20px;
+    padding: 10px;
     height: 165px;
     color: #666;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(238, 238, 238, 0.5);
     transition: all .3s ease;
     &:hover {
       box-shadow: 0 0 25px rgba($themeColor, .15);
@@ -93,20 +109,24 @@ export default {
       & > span {
         margin-right: 10px;
       }
+      @media screen and (max-width: 576px) {
+        position: inherit;
+        margin-top: 8px;
+      }
     }
-    .img {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 160px;
-      height: 120px;
-      overflow: hidden;
-      border-radius: 4px;
-      border: 1px solid #eee;
-      img {
-        width: 100%;
-        height: 100%;
+    .cover-wrapper {
+      margin-left: 20px;
+      @media screen and (max-width: 414px) {
+        display: none;
+      }
+      @media screen and (max-width: 576px) {
+        margin-left: 10px;
+      }
+      .cover {
+        width: 200px;
+        @media screen and (max-width: 576px) {
+          width: 160px;
+        }
       }
     }
   }
