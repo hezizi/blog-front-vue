@@ -1,0 +1,27 @@
+@mixin flex($justify: null, $align: null, $direction: row) {
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+@mixin layout {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+@mixin transition {
+  .router-leave-active,
+  .router-enter-active {
+    transition: all .2s;
+  }
+  .router-enter {
+    opacity: 0;
+    transform:translateX(-5px);
+  }
+  .router-leave-to {
+    opacity: 0;
+    transform:translateX(5px);
+  }
+}

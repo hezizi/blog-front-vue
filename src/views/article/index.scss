@@ -1,0 +1,79 @@
+.detail {
+  // 自定义markdown样式
+  h1, h2, h3, h4, h5, h6 {
+    margin: 30px 0 15px;
+    line-height: 1.5;
+    color: #333;
+    font-weight: 600;
+  }
+  h1, h2 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ececec;
+  }
+  h1 {
+    font-size: 28px;
+  }
+  h2 {
+    font-size: 24px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  h4 {
+    font-size: 18px;
+  }
+  blockquote {
+    padding: 10px 16px;
+    margin: 10px 0;
+    color: #666;
+    border-left: 4px solid rgba($themeColor, .1);
+    background-color: rgba($themeColor, .05);
+    p {
+      margin: 0;
+      // line-height: 2;
+    }
+  }
+  ul, ol {
+    padding-left: 22px;
+    list-style: initial !important;
+    li {
+      margin: 10px 0;
+    }
+  }
+  code {
+    margin: 0 4px;
+    padding: 2px 4px;
+    font-size: 90%;
+    color: $themeColor;
+    background-color: rgba($themeColor, .1);
+    border-radius: 2px;
+  }
+  pre {
+    margin: 20px 0;
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    code {
+      display: block;
+      margin: 0;
+      padding: 0;
+      font-size: 100%;
+      color: #666;
+      background-color: transparent;
+      font-family: 'Fira Code';
+      .hljs-comment {
+        color: #998;
+      }
+    }
+  }
+  p {
+    margin-bottom: 20px;
+    line-height: 1.8;
+  }
+  a {
+    margin: 0 2px;
+  }
+  img {
+    width: 100%;
+  }
+}

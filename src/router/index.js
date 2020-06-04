@@ -1,0 +1,29 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import routes from './routes'
+
+Vue.use(Router)
+
+/**
+ * 添加这段代码用于处理该错误
+ * vue-router.esm.js?8c4f:2007 
+ * Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}
+ */
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
+const router = new Router({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  // scrollBehavior: () => ({ y: 0 }),
+  routes
+})
+
+/* 路由守卫 */
+// router.beforeEach((to, from, next) => {
+  
+// })
+
+export default router

@@ -1,0 +1,10 @@
+@import './mixin';
+
+$headerHeight: 70px;
+$footerHeight: 60px;
+
+$themeColor: #ff7875;
+
+:export {
+  themeColor: $themeColor;
+}

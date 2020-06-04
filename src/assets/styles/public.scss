@@ -1,0 +1,24 @@
+/*
+  public.scss 公用css文件
+*/
+
+.df {
+  display: flex;
+  &-aic {
+    display: flex;
+    align-items: center;
+  }
+  &-jcc {
+    display: flex;
+    justify-content: center;
+  }
+}
+.flex1 {
+  flex: 1;
+}
+.h100 {
+  height: 100%;
+}
+.w100 {
+  width: 100%;
+}
