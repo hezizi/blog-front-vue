@@ -128,6 +128,9 @@ export default {
     }
     .info {
       .about {
+        @media screen and (max-width: 576px) {
+          padding: 0 15px;
+        }
         margin-bottom: 30px;
         padding-left: 25px;
         p {

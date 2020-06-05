@@ -28,10 +28,10 @@ export default {
   .basic-page {
     main {
       @media screen and (max-width: 576px) {
-        padding: 150px 15px 30px;
+        padding-top: 150px;
       }
       @include layout;
-      padding: 100px 15px 30px;
+      padding: 100px 20px 30px;
       min-height: calc(100% - #{$footerHeight});
     }
   }
