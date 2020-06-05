@@ -1,6 +1,6 @@
-
 import marked from 'marked'
 import hljs from 'highlight.js'
+import moment from 'moment'
 
 /* markdown转html */
 export const markdownToHtml = markdown => {
@@ -20,4 +20,5 @@ export const markdownToHtml = markdown => {
 }
 
 /* 日期格式转换 */
-export const dateFormat = date => new Date(date).toLocaleString('zh-CN', { hour12: false }).replace(/\//g, '-')
+export const dateFormat = date => 
+  moment(new Date(date).toLocaleString('zh-CN', { hour12: false })).format('YYYY-MM-DD HH:mm:ss')

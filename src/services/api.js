@@ -11,8 +11,12 @@ import { getRequest, postRequest } from './request'
 // export const register = data => postRequest('/register', data)
 
 /* 文章 */
-export const articleList = data => getRequest('/article/list', data)   // 列表
-export const articleDetail = data => getRequest(`/article/detail/${data}`)   // 详情
+export const articleList = data => getRequest('/article/list', data)
+export const articleDetail = data => getRequest(`/article/detail/${data}`)
 
 /* 标签 */
-export const tagList = data => getRequest('/tag/list', data)  // 列表
+export const tagList = data => getRequest('/tag/list', data)
+
+/* 留言评论 */
+export const comment = data => postRequest('/comment', data)
+export const commentList = data => getRequest('/comment/list', data)

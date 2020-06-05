@@ -198,7 +198,7 @@ export default {
   .home {
     @include flex;
     .wrapper-item {
-      margin-bottom: 36px;
+      margin-bottom: 35px;
       .head-label {
         position: relative;
         padding: 0 0 10px 15px;
@@ -246,5 +246,12 @@ export default {
         }
       }
     }
+  }
+  
+  /deep/ .ant-radio-checked .ant-radio-inner {
+    border-color: $themeColor;
+  }
+  /deep/ .ant-radio-inner::after {
+    background-color: $themeColor;
   }
 </style>

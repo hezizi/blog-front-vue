@@ -18,7 +18,8 @@
           :class="{ 'active': item.to === activeClass }"
           @click="handleJump(item.to)">
           <a-icon 
-            :type="item.icon"/>
+            :type="item.icon"
+            :style="{'margin-right': '3px'}" />
           {{ item.name }}
           <span></span>
         </li>
@@ -48,7 +49,7 @@ export default {
         icon: 'home',
         to: '/'
       }, {
-        name: '分类',
+        name: '标签',
         icon: 'tags',
         to: '/tag'
       }, {
