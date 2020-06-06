@@ -1,4 +1,6 @@
-/* 个人中心 */
+/**
+ * 关于页相关配置
+ */
 // 头像
 const USER_AVATAR = require('@/assets/images/ahh.png')
 // 名称
@@ -39,14 +41,24 @@ const OTHER_LINKS = [{
   link: 'https://www.jianshu.com/u/c1096b3b83eb'
 }]
 
+/**
+ * github授权登录配置
+ */
+const GITHUB = {
+  client_id: '277e5ee3373cd755fb40',
+  auth_url: 'https://github.com/login/oauth/authorize'
+}
 
-const userInfo = () => ({
+
+const appConfig = () => ({
   USER_AVATAR,
   USER_NAME,
   USER_DESC,
   USER_WX,
   // USER_WXGZH,
-  OTHER_LINKS
+  OTHER_LINKS,
+
+  GITHUB
 })
 
-export default userInfo
+export default appConfig

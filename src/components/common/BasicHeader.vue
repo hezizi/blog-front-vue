@@ -4,41 +4,39 @@
       <!-- logo -->
       <div class="logo">
         <router-link to="/">
-          <!-- <img src="@/assets/images/ahh.png" alt="logo"> -->
-          <!-- <span class="logo-title">Yucihzz's Blog</span> -->
           <span class="logo-title">赫子子的博客</span>
         </router-link>
       </div>
 
-      <!-- navbar -->
-      <ul class="navbar">
-        <li 
-          v-for="item in navBarList"
-          :key="item.to"
-          :class="{ 'active': item.to === activeClass }"
-          @click="handleJump(item.to)">
-          <a-icon 
-            :type="item.icon"
-            :style="{'margin-right': '3px'}" />
-          {{ item.name }}
-          <span></span>
-        </li>
-      </ul>
+      <div class="df-aic">
+        <!-- navbar -->
+        <ul class="navbar df">
+          <li 
+            v-for="item in navBarList"
+            :key="item.to"
+            :class="{ 'active': item.to === activeClass }"
+            @click="handleJump(item.to)">
+            <a-icon 
+              :type="item.icon"
+              :style="{'margin-right': '3px'}" />
+            {{ item.name }}
+            <span></span>
+          </li>
+        </ul>
 
-      <!-- register-login -->
-      <!-- <div class="login-group">
-        <router-link to="/login">登录/注册</router-link>
-      </div> -->
-      <!-- search -->
-      <!-- <div class="search df-aic">
-        <a-input placeholder="请输入关键词搜索" style="border: none; box-shadow: none"/>
-        <a-icon type="search" />
-      </div> -->
+        <!-- github login -->
+        <div class="github-login df-aic" @click="githubAuth">
+          <a-icon type="github" :style="{ fontSize: '22px' }" />
+          <span>登录</span>
+        </div>
+      </div>
     </div>
   </header>
 </template>
 
 <script>
+import appConfig from '@/config'
+
 export default {
   name: 'Header',
   data() {
@@ -60,7 +58,9 @@ export default {
         name: '关于',
         icon: 'user',
         to: '/about'
-      }]
+      }],
+
+      githubInfo: appConfig()
     }
   },
   created() {
@@ -85,6 +85,19 @@ export default {
         // scrollTo() 方法可把内容滚动到指定的坐标
         window.scrollTo(0, currentScroll - (currentScroll/5))
       }
+    },
+
+    // github登录授权
+    githubAuth() {
+      this.$confirm({
+        title: 'Github授权登录',
+        okText: '确认',
+        cancelText: '取消',
+        onOk: () => {
+          const { auth_url, client_id } = this.githubInfo.GITHUB
+          window.location.href = `${auth_url}?client_id=${client_id}`
+        }
+      })
     }
   },
 }
@@ -106,14 +119,8 @@ export default {
       @include layout;
       height: $headerHeight;
       .logo {
-        img {
-          margin-right: 10px;
-          width: 55px;
-          border-radius: 50%;
-        }
         &-title {
           position: relative;
-          // top: 4px;
           color: #333;
           font-size: 20px;
           font-family: 'Lato';
@@ -135,12 +142,11 @@ export default {
         }
       }
       .navbar {
-        @include flex($justify: flex-end);
-        margin: 0;
+        // margin-right: 30px;
         li {
           position: relative;
           margin: 0 6px;
-          padding: 4px 12px;
+          padding: 4px 10px;
           color: #666;
           cursor: pointer;
           transition: all .5s ease;
@@ -205,6 +211,13 @@ export default {
               top: 0;
             }
           }
+        }
+      }
+      .github-login {
+        margin-left: 26px;
+        cursor: pointer;
+        span {
+          margin-left: 5px;
         }
       }
     }
