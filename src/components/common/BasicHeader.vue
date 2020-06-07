@@ -25,9 +25,19 @@
         </ul>
 
         <!-- github login -->
-        <div class="github-login df-aic" @click="githubAuth">
-          <a-icon type="github" :style="{ fontSize: '22px' }" />
-          <span>登录</span>
+        <div class="github-login">
+          <div class="user df-aic" v-if="githubInfo.COMMIT_AVATAR">
+            <a-avatar :src="githubInfo.COMMIT_AVATAR" />
+            <a-icon
+              @click="logout"
+              type="logout"
+              :style="{ fontSize: '16px', marginLeft: '10px', cursor: 'pointer' }"
+            />
+          </div>
+          <div class="login-btn df-aic" @click="githubAuth" v-else>
+            <a-icon type="github" :style="{ fontSize: '22px' }" />
+            <span>登录</span>
+          </div>
         </div>
       </div>
     </div>
@@ -35,6 +45,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import appConfig from '@/config'
 
 export default {
@@ -95,8 +106,17 @@ export default {
         cancelText: '取消',
         onOk: () => {
           const { auth_url, client_id } = this.githubInfo.GITHUB
-          window.location.href = `${auth_url}?client_id=${client_id}`
+          window.location.href = `${auth_url}?client_id=${client_id}&scope=read:user`
         }
+      })
+    },
+
+    ...mapActions(['logoutAction']),
+    // 退出登录
+    logout() {
+      this.logoutAction().then(res => {
+        this.$message.success(res, 1.5)
+        window.location.href = '/'
       })
     }
   },
@@ -214,10 +234,12 @@ export default {
         }
       }
       .github-login {
-        margin-left: 26px;
-        cursor: pointer;
-        span {
-          margin-left: 5px;
+        margin-left: 22px;
+        .login-btn {
+          cursor: pointer;
+          span {
+            margin-left: 5px;
+          }
         }
       }
     }

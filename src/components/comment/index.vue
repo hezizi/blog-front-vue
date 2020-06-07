@@ -2,14 +2,16 @@
   <div class="comment-wrapper">
     <a-comment>
       <a-avatar
+        v-if="userAvatar"
         slot="avatar"
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
+        :src="userAvatar"
+        alt="头像"
       />
+      <a-avatar slot="avatar" icon="user" v-else />
       <div slot="content">
         <a-form-item>
           <a-textarea
-            placeholder="不想说点啥吗..."
+            placeholder="说点啥..."
             :rows="5"
             :value="value"
             @change="e => value = e.target.value"
@@ -36,6 +38,7 @@
 <script>
 import CommentList from './list'
 import { comment, commentList } from '@/services/api'
+import conf from '@/config'
 
 export default {
   name: 'Comment',
@@ -44,7 +47,8 @@ export default {
     return {
       value: '',  // 留言
       submitting: false,
-      commList: []
+      commList: [],
+      userAvatar: conf().COMMIT_AVATAR
     }
   },
   methods: {

@@ -49,6 +49,11 @@ const GITHUB = {
   auth_url: 'https://github.com/login/oauth/authorize'
 }
 
+/**
+ * 评论头像
+ */
+import { getStorage } from '@/utils/storage'
+const COMMIT_AVATAR = getStorage('GITHUB_INFO') && getStorage('GITHUB_INFO').avatar_url
 
 const appConfig = () => ({
   USER_AVATAR,
@@ -57,6 +62,8 @@ const appConfig = () => ({
   USER_WX,
   // USER_WXGZH,
   OTHER_LINKS,
+  
+  COMMIT_AVATAR,
 
   GITHUB
 })

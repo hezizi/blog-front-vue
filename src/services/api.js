@@ -7,7 +7,7 @@
 import { getRequest, postRequest } from './request'
 
 /* 登录注册 */
-// export const login = data => postRequest('/login', data)
+export const login = data => postRequest('/user/login', data)
 // export const register = data => postRequest('/register', data)
 
 /* 文章 */

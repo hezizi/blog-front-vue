@@ -5,7 +5,6 @@ export default [{
   component: BasicLayout,
   children: [
     {
-      // 首页
       path: '/',
       name: 'home',
       component: () => import('@/views/home')
@@ -30,6 +29,10 @@ export default [{
       path: '/about',
       name: 'about',
       component: () => import('@/views/about')
+    }, {
+      path: '/auth',
+      name: 'auth',
+      component: () => import('@/components/github-auth')
     }
   ]
 }, {

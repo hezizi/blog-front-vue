@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
 import routes from './routes'
+import { getStorage } from '@/utils/storage'
 
 Vue.use(Router)
 
@@ -22,8 +24,12 @@ const router = new Router({
 })
 
 /* 路由守卫 */
-// router.beforeEach((to, from, next) => {
-  
-// })
+router.beforeEach((to, from, next) => {
+  const token = getStorage('GITHUB_ACCESS_TOKEN')
+  if (token) {
+    to.path.includes('auth') ? next(from.path) : next()
+  }
+  next()
+})
 
 export default router
