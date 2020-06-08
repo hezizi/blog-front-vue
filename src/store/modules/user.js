@@ -3,10 +3,14 @@ import { setStorage, removeStorage } from '@/utils/storage'
 
 export default {
   state: {
+    token: '',
     userInfo: {}
   },
 
   mutations: {
+    SET_TOKEN: (state, payload) => {
+      state.token = payload
+    },
     SET_USERINFO: (state, payload) => {
       state.userInfo = payload
     }
@@ -15,25 +19,30 @@ export default {
   actions: {
     loginAction({ commit }, payload) {
       return login(payload).then(res => {
-        if (res && res.status) {
+        if (res.status) {
           const { token, userInfo } = res.result.data
+
+          // Object.keys(mutations).map(key => {
+          //   commit(key, token)
+          // })
+
+          commit('SET_TOKEN', token)
           commit('SET_USERINFO', userInfo)
-          setStorage('GITHUB_INFO', userInfo)
           setStorage('GITHUB_ACCESS_TOKEN', token)
-          return Promise.resolve(userInfo)
+          setStorage('GITHUB_INFO', userInfo)
+          return Promise.resolve(userInfo.github)
         } else {
-          return Promise.reject('登录失败')
+          return Promise.reject(res.message)
         }
       })
     },
 
     logoutAction({ commit }) {
+      commit('SET_TOKEN', '')
       commit('SET_USERINFO', {})
-      removeStorage('GITHUB_INFO')
       removeStorage('GITHUB_ACCESS_TOKEN')
-      setTimeout(() => {
-        return Promise.resolve('已退出')
-      }, 500)
+      removeStorage('GITHUB_INFO')
+      return Promise.resolve('已退出')
     }
   }
 }

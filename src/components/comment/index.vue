@@ -23,8 +23,7 @@
             type="primary"
             :loading="submitting"
             @click="handleSubmit"
-          >
-            给你留言啦
+          > 我要留言
           </a-button>
         </a-form-item>
       </div>
@@ -36,7 +35,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import CommentList from './list'
+// import { getStorage } from '@/utils/storage'
 import { comment, commentList } from '@/services/api'
 import conf from '@/config'
 
@@ -51,15 +52,25 @@ export default {
       userAvatar: conf().COMMIT_AVATAR
     }
   },
+  computed: {
+    ...mapGetters(['token', 'userInfo'])
+  },
+  mounted() {
+    this.getCommentList()
+  },
   methods: {
     // 我要留言了
     handleSubmit() {
+      // const token = getStorage('GITHUB_ACCESS_TOKEN')
+      // const userInfo = getStorage('GITHUB_INFO')
+      console.log('this.token', this.token)
+      console.log(this.userInfo)
+      if (!this.token && !this.userInfo) {
+        this.$message.warn('未登录，请先登录!', 2)
+      }
+      
       if (!this.value) return
 
-      // this.submitting = true
-      // setTimeout(() => {
-      //   this.submitting = false
-      // }, 1000);
       this.submitting = true
       comment({ content: this.value }).then(res => {
         this.$message.success(res.message, 1.5)

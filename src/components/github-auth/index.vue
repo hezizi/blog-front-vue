@@ -14,7 +14,6 @@ import { mapActions } from 'vuex'
 export default {
   name: 'GithubAuth',
   beforeRouteEnter (to, from, next) {
-    console.log('from', from)
     next(vm => {
       vm.prevRoute = from
     })
@@ -39,9 +38,11 @@ export default {
           this.$message.error(err, 1.5)
         })
         .finally(() => {
-          this.$router.push({ path: this.prevRoute.path })
-          // console.log('this.prevRoute.path', this.prevRoute.path)
+          // this.$router.push({ path: this.prevRoute.path })
           // window.location.href = this.prevRoute.path
+          setTimeout(() => {
+            window.location.href = '/'
+          }, 500)
         })
     }
   },

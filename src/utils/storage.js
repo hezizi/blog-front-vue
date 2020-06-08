@@ -1,9 +1,8 @@
 import Cookie from 'js-cookie'
 
 // 存
-const expires = new Date(new Date().getTime() + 10 * 60 * 1000)  // 1min
+const expires = new Date(new Date().getTime() + 10 * 60 * 1000)  // 10min
 export const setStorage = (key, val) => {
-  console.log('val', val, val instanceof Object)
   Cookie.set(key, val instanceof Object ? JSON.stringify(val) : val, expires)
 }
 

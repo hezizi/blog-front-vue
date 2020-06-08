@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// import store from '@/store'
 import routes from './routes'
 import { getStorage } from '@/utils/storage'
 
@@ -26,6 +27,7 @@ const router = new Router({
 /* 路由守卫 */
 router.beforeEach((to, from, next) => {
   const token = getStorage('GITHUB_ACCESS_TOKEN')
+  // const token = store.getters.token
   if (token) {
     to.path.includes('auth') ? next(from.path) : next()
   }

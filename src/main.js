@@ -3,6 +3,7 @@ import App from './App.vue'
 
 import router from './router'
 import store from './store'
+import { getStorage } from '@/utils/storage'
 
 import Antd from 'ant-design-vue/es'
 
@@ -24,5 +25,9 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
+  mounted() {
+    store.commit('SET_TOKEN', getStorage('GITHUB_ACCESS_TOKEN'))
+    store.commit('SET_USERINFO', getStorage('GITHUB_INFO'))
+  },
   render: h => h(App)
 }).$mount('#app')

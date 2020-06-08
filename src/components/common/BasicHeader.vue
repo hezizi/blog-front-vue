@@ -74,15 +74,15 @@ export default {
       githubInfo: appConfig()
     }
   },
-  created() {
-    this.activeClass = this.$route.path
-  },
   watch: {
     $route() {
       this.activeClass = this.$route.path
       // 路由变化时调用滑动到顶部方法
       // this.smoothscroll()
-    }
+    },
+  },
+  mouted() {
+    this.activeClass = this.$route.path
   },
   methods: {
     handleJump(to) {
@@ -116,7 +116,11 @@ export default {
     logout() {
       this.logoutAction().then(res => {
         this.$message.success(res, 1.5)
-        window.location.href = '/'
+        // window.location.href = '/'
+        
+        setTimeout(() => {
+          window.location.reload()
+        }, 500)
       })
     }
   },
