@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import moment from 'moment'
 import LoadMore from '@/components/load-more'
 import { commentList } from '@/services/api'
 import { markdownToHtml } from '@/utils'
@@ -76,27 +75,22 @@ export default {
         pageSize: this.pageSize
       }).then(res => {
         this.total = res.result.total
+        this.isShowLoadMore = this.total >= this.pageNum * this.pageSize && true
 
         const list = res.result.data.map(item => ({
           author: item.user.github.name,
           avatar: item.user.github.avatar_url,
           content: item.content,
-          datetime: moment(item.create_time).fromNow()
+          datetime: this.moment(item.create_time).fromNow()
         }))
         this.commList = isAdd ? list : [ ...this.commList, ...list ]
-
-        return Promise.resolve(res)
       })
     },
 
     // 加载更多
     loadMore() {
       this.loadingMore = true
-      this.commListApi().then(() => {
-        if (this.total >= this.pageNum * this.pageSize) {
-          this.isShowLoadMore = true
-        }
-      }).finally(() => {
+      this.commListApi().finally(() => {
         this.loadingMore = false
       })
     }
