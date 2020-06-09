@@ -52,8 +52,7 @@ import ArticleAnchor from '@/components/anchor'
 import FetchLoading from '@/components/loading'
 import { markdownToHtml, dateFormat } from '@/utils'
 import { articleDetail } from '@/services/api'
-import './index.scss'
-import 'highlight.js/styles/atom-one-dark-reasonable.css'
+import '@/assets/styles/markdown.scss'
 
 export default {
   name: 'ArticleDetail',

@@ -11,7 +11,7 @@
       <div slot="content">
         <a-form-item>
           <a-textarea
-            placeholder="说点啥..."
+            placeholder="说点啥... （支持 markdown 语法）"
             :rows="5"
             :value="value"
             @change="e => value = e.target.value"
@@ -57,7 +57,9 @@ export default {
     // 我要留言了
     handleSubmit() {
       if (!this.token && !this.userInfo) {
-        this.$message.warn('未登录，请先登录!', 2)
+        this.$message.warn('未登录，请先登录 !', 2)
+        this.value = ''
+        return
       }
       
       if (!this.value) return
@@ -74,7 +76,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss" scoped>
-  
-</style>
