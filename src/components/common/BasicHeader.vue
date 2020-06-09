@@ -81,7 +81,7 @@ export default {
       // this.smoothscroll()
     },
   },
-  mouted() {
+  created() {
     this.activeClass = this.$route.path
   },
   methods: {

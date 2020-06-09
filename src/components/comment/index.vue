@@ -30,14 +30,13 @@
     </a-comment>
 
     <!-- 留言列表 -->
-    <comment-list :comm-list="commList" />
+    <comment-list ref="commlist" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import CommentList from './list'
-// import { getStorage } from '@/utils/storage'
 import { comment, commentList } from '@/services/api'
 import conf from '@/config'
 
@@ -48,23 +47,15 @@ export default {
     return {
       value: '',  // 留言
       submitting: false,
-      commList: [],
-      userAvatar: conf().COMMIT_AVATAR
+      userAvatar: conf().COMMIT_AVATAR,
     }
   },
   computed: {
     ...mapGetters(['token', 'userInfo'])
   },
-  mounted() {
-    this.getCommentList()
-  },
   methods: {
     // 我要留言了
     handleSubmit() {
-      // const token = getStorage('GITHUB_ACCESS_TOKEN')
-      // const userInfo = getStorage('GITHUB_INFO')
-      console.log('this.token', this.token)
-      console.log(this.userInfo)
       if (!this.token && !this.userInfo) {
         this.$message.warn('未登录，请先登录!', 2)
       }
@@ -72,23 +63,12 @@ export default {
       if (!this.value) return
 
       this.submitting = true
-      comment({ content: this.value }).then(res => {
+      comment({ userId: this.userInfo.user_id, content: this.value }).then(res => {
         this.$message.success(res.message, 1.5)
         this.submitting = false
         this.value = ''
 
-        this.getCommentList()
-      })
-    },
-
-    // 留言列表
-    getCommentList() {
-      commentList({
-        pageNum: 1,
-        pageSize: 10
-      }).then(res => {
-        console.log('res', res)
-        this.commList = res.result.data
+        this.$refs['commlist'].commListApi(true)
       })
     }
   },
