@@ -5,6 +5,7 @@ $footerHeight: 60px;
 
 $themeColor: #ff7875;
 
+// 使可在js中使用该scss变量
 :export {
   themeColor: $themeColor;
 }

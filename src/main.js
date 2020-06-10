@@ -30,6 +30,7 @@ new Vue({
   mounted() {
     store.commit('SET_TOKEN', getStorage('GITHUB_ACCESS_TOKEN'))
     store.commit('SET_USERINFO', getStorage('GITHUB_INFO'))
+    store.dispatch('setAllTags')
   },
   render: h => h(App)
 }).$mount('#app')

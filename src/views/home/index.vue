@@ -129,10 +129,9 @@ export default {
     this.getList()
     this.getHottest()
     this.getLatest()
-    !this.allTags.length && this.setAllTags()
   },
   methods: {
-    ...mapActions(['setAllTags', 'setHottest', 'setLatest']),
+    ...mapActions(['setHottest', 'setLatest']),
 
     /* 数据获取 */
     fetch(callBack, size) {

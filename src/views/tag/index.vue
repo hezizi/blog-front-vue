@@ -1,14 +1,12 @@
 <template>
   <div class="tag-page">
-    <!-- <div class="tags" v-for="tag in allTags" :key="tag._id">
-      <a-tag :color="tagColor" :style="{fontSize: `${tagStyle(tag.article.length)}px`}">
-        {{ tag.name }}
-      </a-tag>
-    </div> -->
     <ul>
       <li v-for="tag in allTags" :key="tag._id">
         <a-badge
           :count="tag.article.length"
+          :number-style="{
+            backgroundColor: badgeColor
+          }"
           show-zero
           :style="{fontSize: `${tagStyle(tag.article.length)}px`}"
         >
@@ -22,12 +20,13 @@
 <script>
 import { mapGetters } from 'vuex'
 import { setSizeByCount } from '@/utils'
+import { themeColor } from '@/assets/styles/variables.scss'
 
 export default {
   name: 'TagPage',
   data() {
     return {
-      
+      badgeColor: themeColor
     }
   },
   computed: {
@@ -38,7 +37,7 @@ export default {
     $route() {
       console.log('this.$route.path', this.$route.path)
     }
-  },
+  }
 }
 </script>
 
@@ -49,6 +48,7 @@ export default {
       @include flex($justify: center);
       flex-wrap: wrap;
       li {
+        @include flex($align: center);
         margin: 20px;
         span {
           padding-bottom: 6px;

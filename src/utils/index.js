@@ -25,13 +25,15 @@ export const dateFormat = date =>
 /* 根据数量定大小 */
 export const setSizeByCount = count => {
   switch (true) {
-    case count <= 3:
-      return 16
-    case 3 < count <= 8:
-      return 20
-    case 8 < count <= 15:
-      return 24
-    default:
+    case count === 0:
       return 14
+    case count > 0 && count <= 5:
+      return 18
+    case count > 5 && count <= 10:
+      return 24
+    case count > 10 && count <= 15:
+      return 28
+    default:
+      return 32
   }
 }
