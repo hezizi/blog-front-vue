@@ -17,7 +17,7 @@ export default {
   props: {
     isShowLoadMore: {
       type: Boolean,
-      default: true
+      default: false
     },
     loadingMore: {
       type: Boolean,

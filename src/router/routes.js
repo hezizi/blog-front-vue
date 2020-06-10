@@ -18,7 +18,11 @@ export default [{
       // 标签
       path: '/tag',
       name: 'tag',
-      component: () => import('@/views/tag')
+      component: () => import('@/views/tag'),
+      children: [{
+        path: ':name',
+        component: () => import('@/views/tag')
+      }]
     }, {
       // 归档
       path: '/archive',

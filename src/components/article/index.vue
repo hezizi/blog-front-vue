@@ -22,7 +22,12 @@
         <!-- 描述 -->
         <p class="desc">{{ desc(item) }}</p>
         <div class="meta df-aic">
-          <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
+          <a-tooltip placement="top">
+            <template slot="title">
+              <span>{{ createDate(item, 'tooltip') }}</span>
+            </template>
+            <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
+          </a-tooltip>
           <span><a-icon type="eye" /> {{ item.views }}</span>
         </div>
       </div>
@@ -37,7 +42,7 @@
 </template>
 
 <script>
-import { markdownToHtml, dateFormat } from '@/utils'
+import { dateFormat } from '@/utils'
 
 export default {
   name: 'Articles',
@@ -49,7 +54,12 @@ export default {
   },
   computed: {
     desc: () => item => item.desc,
-    createDate: () => item => dateFormat(item.create_time),
+    // createDate: () => item => dateFormat(item.create_time),
+    createDate() {
+      return (item, v) => {
+        return v ? dateFormat(item.create_time) : this.moment(item.create_time).fromNow()
+      }
+    },
     coverUrl: () => item => {
       return item.cover 
         ? `http://localhost:5000/upload/${item.cover}`

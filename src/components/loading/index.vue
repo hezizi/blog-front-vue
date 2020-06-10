@@ -2,6 +2,9 @@
   <a-skeleton :loading="loading" active>
     <slot />
   </a-skeleton>
+  <!-- <a-spin tip="Loading..." :spinning="loading">
+    <slot />
+  </a-spin> -->
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <a-row :gutter="36">
+  <div class="home-page">
+    <a-row :gutter="36" class="flex1">
       <a-col :lg="18" :md="16">
         <!-- 标签列表 -->
         <div class="wrapper-item">
@@ -20,7 +20,20 @@
             </a-radio-group>
           </div>
           <fetch-loading ref="fetch">
-            <home-articles v-if="aList.length" :article-list="aList" />
+            <div v-if="aList.length" >
+              <home-articles :article-list="aList" />
+              
+              <!-- 分页 -->
+              <div class="pagiation-wrapper" v-if="this.total > this.pageSize">
+                <a-pagination
+                  :current="pageNum"
+                  :total="total"
+                  :page-size="pageSize"
+                  :showTotal="(total, range) =>`${range[0]} - ${range[1]} 共 ${total} 篇文章`"
+                  @change="onPagerChange"
+                />
+              </div>
+            </div>
             <div class="empty" v-else>
               <a-empty description="暂无数据"/>
             </div>
@@ -79,11 +92,6 @@ import { articleList } from '@/services/api'
 
 export default {
   name: 'Home',
-  /* 离开首页时移除滚动事件 */
-  beforeRouteLeave (to, from, next) {
-    window.removeEventListener('scroll', this.handleScroll)
-    next()
-  },
   components: {
     HomeArticles,
     HomeTags,
@@ -95,8 +103,11 @@ export default {
       aList: [],
       hottest: [],  // 最热
       latest: [],  // 最新
+      
       pageNum: 1,
-      pageSize: 10,
+      pageSize: 15,
+      total: 0,
+
       params: {
         sortBy: 'latest'
       },
@@ -114,25 +125,22 @@ export default {
   computed: {
     ...mapGetters(['allTags'])
   },
-  // watch: {
-  //   aList() {}
-  // },
   mounted() {
     this.getList()
     this.getHottest()
     this.getLatest()
     !this.allTags.length && this.setAllTags()
-    // window.addEventListener('scroll', this.handleScroll)
   },
   methods: {
     ...mapActions(['setAllTags', 'setHottest', 'setLatest']),
+
     /* 数据获取 */
-    fetch(callBack) {
+    fetch(callBack, size) {
       this.$refs['fetch'].fetchData({
         api: articleList,
         params: {
           pageNum: this.pageNum,
-          pageSize: this.pageSize,
+          pageSize: size,
           ...this.params
         },
         withLoading: true,
@@ -142,13 +150,10 @@ export default {
     
     /* 文章列表 */
     getList() {
-      this.pageSize = 10
       this.fetch(result => {
         this.aList = result.data
-        if (result.total === this.aList.length) {
-          window.removeEventListener('scroll', this.handleScroll)
-        }
-      })
+        this.total = result.total
+      }, this.pageSize)
     },
 
     /* 最新，最热排序 */
@@ -159,9 +164,8 @@ export default {
 
     /* 热门文章 */
     commonFn(arg) {
-      this.pageSize = 5
       this.$set(this.params, 'sortBy', arg)
-      this.fetch(result => this[arg] = result.data)
+      this.fetch(result => this[arg] = result.data, 5)
     },
     getHottest() {
       this.commonFn('hottest')
@@ -177,25 +181,21 @@ export default {
     /* 标签选择 */
     getSelectedTag(tag) {
       this.$set(this.params, 'tags', tag._id)
+      this.pageNum = 1
       this.getList()
     },
 
-    /* scroll事件 */
-    handleScroll() {
-      const scrollT = document.documentElement.scrollTop || document.body.scrollTop
-      const scrollH = document.querySelector('.home').scrollHeight
-      const clientH = document.documentElement.clientHeight
-      // if (!this.isLoading && scrollT + clientH > scrollH) {
-      //   this.pageNum++
-      //   this.getList()
-      // }
+    /* 分页 */
+    onPagerChange(cur, size) {
+      this.pageNum = cur
+      this.getList()
     }
   },
 }
 </script>
 
 <style lang="scss" scoped>
-  .home {
+  .home-page {
     @include flex;
     .wrapper-item {
       margin-bottom: 35px;
@@ -218,12 +218,14 @@ export default {
           font-size: 20px;
         }
       }
+      .pagiation-wrapper {
+        @include flex($justify: flex-end);
+        margin-top: 60px;
+      }
     }
-    // .left-wrapper {
     .article-title {
       @include flex($justify: space-between, $align: center);
     }
-    // }
     .list {
       border-radius: 2px;
       padding: 0 10px;

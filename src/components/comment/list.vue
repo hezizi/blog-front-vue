@@ -1,31 +1,33 @@
 <template>
-  <div class="comment-list">
-    <a-list
-      v-if="commList.length"
-      :data-source="commList"
-      :header="listHeader"
-      item-layout="horizontal"
-    >
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-comment
-          class="w100"
-          :author="item.author"
-          :avatar="item.avatar"
-          :datetime="item.datetime"
-        >
-          <!-- :content="commContent(item.content)" -->
-          <div class="comment-content" slot="content" v-html="commContent(item.content)"></div>
-        </a-comment>
-      </a-list-item>
+  <a-spin tip="Loading..." :spinning="loading">
+    <div class="comment-list">
+      <a-list
+        v-if="commList.length"
+        :data-source="commList"
+        :header="listHeader"
+        item-layout="horizontal"
+      >
+        <a-list-item slot="renderItem" slot-scope="item">
+          <a-comment
+            class="w100"
+            :author="item.author"
+            :avatar="item.avatar"
+            :datetime="item.datetime"
+          >
+            <!-- :content="commContent(item.content)" -->
+            <div class="comment-content" slot="content" v-html="commContent(item.content)"></div>
+          </a-comment>
+        </a-list-item>
 
-      <!-- 加载更多 -->
-      <load-more
-        :is-show-load-more="isShowLoadMore"
-        :loading-more="loadingMore"
-        @getPageNum="getPageNum"
-      />
-    </a-list>
-  </div>
+        <!-- 加载更多 -->
+        <load-more
+          :is-show-load-more="isShowLoadMore"
+          :loading-more="loadingMore"
+          @getPageNum="getPageNum"
+        />
+      </a-list>
+    </div>
+  </a-spin>
 </template>
 
 <script>
@@ -41,9 +43,10 @@ export default {
     return {
       isShowLoadMore: false,
       loadingMore: false,
+      loading: false,
       commList: [],
       pageNum: 1,
-      pageSize: 5,
+      pageSize: 15,
       total: 0
     }
   },
@@ -70,12 +73,13 @@ export default {
 
     // 留言列表
     commListApi(isAdd = false) {
-      return commentList({
-        pageNum: this.pageNum,
+      this.loading = true
+      commentList({
+        pageNum: isAdd ? 1 : this.pageNum,
         pageSize: this.pageSize
       }).then(res => {
         this.total = res.result.total
-        this.isShowLoadMore = this.total >= this.pageNum * this.pageSize && true
+        this.isShowLoadMore = this.total > this.pageNum * this.pageSize && true
 
         const list = res.result.data.map(item => ({
           author: item.user.github.name,
@@ -84,15 +88,16 @@ export default {
           datetime: this.moment(item.create_time).fromNow()
         }))
         this.commList = isAdd ? list : [ ...this.commList, ...list ]
+      }).finally(() => {
+        this.loading = false
+        this.loadingMore = false
       })
     },
 
     // 加载更多
     loadMore() {
       this.loadingMore = true
-      this.commListApi().finally(() => {
-        this.loadingMore = false
-      })
+      this.commListApi()
     }
   }
 }

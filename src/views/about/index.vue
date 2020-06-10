@@ -1,5 +1,5 @@
 <template>
-  <div class="about-wrapper">
+  <div class="about-page">
     <div class="author mb30">
       <a-avatar :size="80" :src="userInfo.USER_AVATAR" />
       <div class="name">
@@ -79,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .about-wrapper {
+  .about-page {
     @media screen and (max-width: 992px) {
       padding: 0 60px;
     }
