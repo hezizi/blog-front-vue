@@ -10,7 +10,7 @@
           show-zero
           :style="{fontSize: `${tagStyle(tag.article.length)}px`}"
         >
-         <router-link :to="{ path: `/tag/${tag.name}` }" >{{ tag.name }}</router-link>
+         <router-link :to="{ path: `/tag/${tag.name}`, query: { tag_id: tag._id } }" >{{ tag.name }}</router-link>
         </a-badge>
       </li>
     </ul>

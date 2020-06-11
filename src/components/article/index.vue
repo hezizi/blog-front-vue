@@ -102,8 +102,8 @@ export default {
     .tags {
       margin-bottom: 12px;
       .tag {
-        border: 1px solid transparent;
         color: #666;
+        border: 1px solid transparent;
         background-color: rgba($themeColor, .15);
       }
     }

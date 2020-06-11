@@ -18,7 +18,13 @@ export default {
   actions: {
     setAllTags({ commit }) {
       tagList().then(res => {
-        commit('SET_ALL_TAGS', res.result.data)
+        const newRes = res.result.data.map(t => {
+          t.article && t.article.map((a, i) => {
+            if (a.status !== 'published') t.article.splice(i, 1)
+          })
+          return t
+        })
+        commit('SET_ALL_TAGS', newRes)
       })
     },
     setSelectedTag({ commit }, payload) {

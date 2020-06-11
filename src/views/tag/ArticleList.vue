@@ -32,6 +32,10 @@
               <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
             </a-tooltip>
             <span><a-icon type="eye" /> {{ item.views }}</span>
+            <div class="df-aic">
+              <a-icon type="tags" :style="{marginRight: '5px'}"/>
+              <a-tag class="tag" v-for="tag in item.tags" :key="tag._id">{{ tag.name }}</a-tag>
+            </div>
           </div>
         </div>
       </div>
@@ -40,6 +44,7 @@
 </template>
 
 <script>
+import { themeColor } from '@/assets/styles/variables.scss'
 import FetchLoading from '@/components/loading'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
@@ -58,6 +63,9 @@ export default {
       pageSize: 20,
       
       articlesList: [],
+
+      
+      tagColor: themeColor,
       
       userInfo: userConf(),
 
@@ -76,11 +84,13 @@ export default {
   },
   methods: {
     async getAllArticle() {
+      const tagId = this.$route.query.tag_id
       this.$refs['fetch'].fetchData({
         api: articleList,
         params: {
           pageNum: this.pageNum,
-          pageSize: this.pageSize
+          pageSize: this.pageSize,
+          tags: tagId
         },
         withLoading: true,
         handleFn: result => {
@@ -114,17 +124,22 @@ export default {
     }
     .item {
       padding: 15px 0;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
+      margin-bottom: 15px;
+      border-bottom: 1px dashed #eee;
       .avatar {
         margin-right: 10px;
       }
       .title {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
       .meta {
-        span {
+        & > span {
           margin-right: 10px;
+        }
+        .tag {
+          color: #666;
+          border: 1px solid transparent;
+          background-color: rgba($themeColor, .15);
         }
       }
     }
