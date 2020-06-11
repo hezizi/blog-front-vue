@@ -32,11 +32,6 @@ export default {
   computed: {
     ...mapGetters(['allTags']),
     tagStyle: () => len => setSizeByCount(len)
-  },
-  watch: {
-    $route() {
-      console.log('this.$route.path', this.$route.path)
-    }
   }
 }
 </script>

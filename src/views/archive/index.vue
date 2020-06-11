@@ -1,16 +1,31 @@
 <template>
-  <fetch-loading ref="fetch">
-    <a-timeline>
-      <a-timeline-item
-        :color="color"
-        v-for="item in articlesList"
-        :key="item._id"
-      >
-        <span class="date">{{ item.create_time.slice(5, 10) }}</span>
-        <router-link :to="{ name: 'article', params: { articleId: item._id } }">{{ item.title }}</router-link>
-      </a-timeline-item>
-    </a-timeline>
-  </fetch-loading>
+  <div class="achieve-page">
+    <fetch-loading ref="fetch">
+      <a-timeline>
+        <template v-for="(list, i) in newList">
+          <a-timeline-item
+            :key="i"
+            :color="color"
+            :style="{ color: color }"
+          >
+            <a-icon slot="dot" type="clock-circle-o" style="font-size: 18px;" />
+            <span class="header-year">{{ list[0].create_time.slice(0, 4) }}</span>
+          </a-timeline-item>
+
+          <a-timeline-item
+            v-for="item in list"
+            :key="item._id"
+            :color="color"
+          >
+            <span class="date">{{ item.create_time.slice(5, 10) }}</span>
+            <router-link
+              :to="{ name: 'article', params: { articleId: item._id } }"
+            >{{ item.title }}</router-link>
+          </a-timeline-item>
+        </template>
+      </a-timeline>
+    </fetch-loading>
+  </div>
 </template>
 
 <script>
@@ -25,9 +40,13 @@ export default {
   },
   data() {
     return {
-      color: themeColor,
+      pageNum: 1,
+      pageSize: 20,
+      
       articlesList: [],
-      newList: []
+      newList: [],
+      
+      color: themeColor,
     }
   },
   mounted() {
@@ -43,22 +62,15 @@ export default {
         },
         withLoading: true,
         handleFn: result => {
-          new Promise(resolve => {
-            this.articlesList = result.data
-            resolve(this.articlesList)
-          }).then(res => {
-            const dateObj = {}
-            console.log('this.articlesList', this.articlesList)
-            this.newList = this.articlesList.map(item => {
-              const group = item.create_time.slice(0, 4)
-              dateObj[group] = dateObj[group] || []
-              dateObj[group].push(item)
-              console.log('dateObj', dateObj, Object.keys(dateObj))
-              // return Object.keys(dateObj).map(group => dateObj[group])
-            })
+          this.articlesList = result.data
 
-            console.log('this.newList', this.newList)
+          const dateObj = {}
+          this.articlesList.map(item => {
+            const year = item.create_time.slice(0, 4)
+            dateObj[year] = dateObj[year] || []
+            dateObj[year].push(item)
           })
+          this.newList = Object.keys(dateObj).map(group => dateObj[group])
         }
       })
     },
@@ -67,7 +79,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .date {
-    margin-right: 10px;
+  .achieve-page {
+    margin-top: 30px;
+    .header-year {
+      position: relative;
+      top: -8px;
+      margin-left: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      color: $themeColor;
+    }
+    .date {
+      margin-right: 10px;
+    }
   }
 </style>

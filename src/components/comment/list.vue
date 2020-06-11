@@ -82,8 +82,8 @@ export default {
         this.isShowLoadMore = this.total > this.pageNum * this.pageSize && true
 
         const list = res.result.data.map(item => ({
-          author: item.user.github.name,
-          avatar: item.user.github.avatar_url,
+          author: item.user_github.github.name,
+          avatar: item.user_github.github.avatar_url,
           content: item.content,
           datetime: this.moment(item.create_time).fromNow()
         }))
