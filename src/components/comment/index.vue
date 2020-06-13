@@ -65,13 +65,16 @@ export default {
       if (!this.value) return
 
       this.submitting = true
-      comment({ userId: this.userInfo.user_id, content: this.value }).then(res => {
-        this.$message.success(res.message, 1.5)
-        this.submitting = false
-        this.value = ''
-
-        this.$refs['commlist'].commListApi(true)
-      })
+      comment({ userId: this.userInfo.user_id, content: this.value })
+        .then(res => {
+          this.$message.success(res.message, 1.5)
+          
+          this.$refs['commlist'].commListApi(true)
+        })
+        .finally(() => {
+          this.submitting = false
+          this.value = ''
+        })
     }
   },
 }

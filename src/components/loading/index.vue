@@ -23,7 +23,7 @@ export default {
       this.loading = false
 
       if (!res) {
-        this.$message.error('出错啦！！！', 1.5)
+        // this.$message.error('出错啦！！！', 1.5)
         return
       }
       const { status, message, result } = res
