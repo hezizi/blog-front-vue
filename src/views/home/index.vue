@@ -5,7 +5,7 @@
         <!-- 标签列表 -->
         <div class="wrapper-item">
           <div class="head-label">
-            <h2>标签分类</h2>
+            <h2>文章标签</h2>
           </div>
           <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
         </div>
@@ -20,11 +20,16 @@
             </a-radio-group>
           </div>
           <fetch-loading ref="fetch">
-            <div v-if="aList.length" >
+            <!-- 暂无数据 -->
+            <div v-if="isEmpty">
+              <a-empty description="暂无数据"/>
+            </div>
+
+            <div v-else>
               <home-articles :article-list="aList" />
               
               <!-- 分页 -->
-              <div class="pagiation-wrapper" v-if="this.total > this.pageSize">
+              <div class="pagiation-wrapper" v-if="total > pageSize">
                 <a-pagination
                   :current="pageNum"
                   :total="total"
@@ -34,22 +39,11 @@
                 />
               </div>
             </div>
-            <div class="empty" v-else>
-              <a-empty description="暂无数据"/>
-            </div>
           </fetch-loading>
         </div>
       </a-col>
 
       <a-col :lg="6" :md="8">
-        <!-- 标签分类 -->
-        <!-- <div class="wrapper-item">
-          <div class="head-label">
-            <h2>标签分类</h2>
-          </div>
-          <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
-        </div> -->
-        
         <!-- 推荐 最新 -->
         <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
           <div class="head-label">
@@ -100,19 +94,19 @@ export default {
   data() {
     return {
       /* article */
-      aList: [],
+      aList: [],    // 文章列表
       hottest: [],  // 最热
-      latest: [],  // 最新
-      
+      latest: [],   // 最新
+      // 分页
       pageNum: 1,
       pageSize: 15,
       total: 0,
-
+      // 无数据
+      isEmpty: false,
       params: {
         sortBy: 'latest'
       },
       radioVal: 'latest',
-
       wrapperList: [{
         title: '推荐文章',
         label: 'hottest'
@@ -134,7 +128,7 @@ export default {
     ...mapActions(['setHottest', 'setLatest']),
 
     /* 数据获取 */
-    fetch(callBack, size) {
+    fetch(cb, size) {
       this.$refs['fetch'].fetchData({
         api: articleList,
         params: {
@@ -143,15 +137,16 @@ export default {
           ...this.params
         },
         withLoading: true,
-        handleFn: result => callBack(result)
+        handleFn: result => cb(result)
       })
     },
     
     /* 文章列表 */
     getList() {
-      this.fetch(result => {
-        this.aList = result.data
-        this.total = result.total
+      this.fetch(({ data, total }) => {
+        this.aList = data
+        this.total = total
+        this.isEmpty = !this.total && true
       }, this.pageSize)
     },
 
@@ -202,7 +197,7 @@ export default {
         position: relative;
         padding: 0 0 10px 15px;
         margin-bottom: 15px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px dashed #eee;
         line-height: 24px;
         h2 {
           margin: 0;

@@ -118,7 +118,7 @@ export default {
     header {
       margin-bottom: 20px;
       padding-bottom: 15px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px dashed #eee;
       .title {
         margin-bottom: 20px;
         h1 {

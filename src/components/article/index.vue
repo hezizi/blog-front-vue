@@ -61,7 +61,7 @@ export default {
       }
     },
     coverUrl: () => item => {
-      return item.cover 
+      return item.cover
         ? `http://localhost:5000/upload/${item.cover}`
         : require('@/assets/images/cover_default.png')
     }
@@ -127,6 +127,7 @@ export default {
       }
     }
     .cover-wrapper {
+      overflow: hidden;
       margin-left: 20px;
       @media screen and (max-width: 414px) {
         display: none;
