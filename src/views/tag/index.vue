@@ -1,16 +1,19 @@
 <template>
   <div class="tag-page">
     <ul>
-      <li v-for="tag in allTags" :key="tag._id">
+      <li
+        :key="tag._id"
+        v-for="tag in allTags"
+      >
         <a-badge
           :count="tag.article.length"
           :number-style="{
             backgroundColor: badgeColor
           }"
-          show-zero
           :style="{fontSize: `${tagStyle(tag.article.length)}px`}"
+          show-zero
         >
-         <router-link :to="{ path: `/tag/${tag.name}`, query: { tag_id: tag._id } }" >{{ tag.name }}</router-link>
+          <router-link :to="{ path: `/tag/${tag.name}`, query: { tag_id: tag._id } }">{{ tag.name }}</router-link>
         </a-badge>
       </li>
     </ul>
@@ -24,7 +27,7 @@ import { themeColor } from '@/assets/styles/variables.scss'
 
 export default {
   name: 'TagPage',
-  data() {
+  data () {
     return {
       badgeColor: themeColor
     }
@@ -37,22 +40,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .tag-page {
-    margin-top: 30px;
-    ul {
-      @include flex($justify: center);
-      flex-wrap: wrap;
-      li {
-        @include flex($align: center);
-        margin: 20px;
-        span {
-          padding-bottom: 6px;
-          border-bottom: 1px dashed $themeColor;
-        }
+.tag-page {
+  margin-top: 30px;
+  padding: 0 60px;
+  ul {
+    @include flex($justify: center);
+    flex-wrap: wrap;
+    li {
+      @include flex($align: center);
+      margin: 20px;
+      span {
+        padding-bottom: 6px;
+        border-bottom: 1px dashed $themeColor;
       }
     }
   }
-  /deep/ .ant-badge-count {
-    right: -10px;
-  }
+}
+/deep/ .ant-badge-count {
+  right: -10px;
+}
 </style>

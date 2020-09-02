@@ -1,24 +1,34 @@
 <template>
   <div class="article-tag-page">
     <fetch-loading ref="fetch">
-
       <div class="breadcrumb">
-        <a-breadcrumb :routes="routes">
-          <template slot="itemRender" slot-scope="{route, params, routes, paths}">
-            <!-- {{ route }} -->
-            <span v-if="routes.indexOf(route) === routes.length - 1">
-              {{route.breadcrumbName}}
-            </span>
-            <router-link v-else :to="paths.join('/')">
-              {{route.breadcrumbName}}
-            </router-link>
+        <!-- <a-breadcrumb :routes="routes">
+          <template
+            slot="itemRender"
+            slot-scope="{route, params, routes, paths}"
+          >
+
+            <span v-if="routes.indexOf(route) === routes.length - 1">{{route.breadcrumbName}}</span>
+            <router-link
+              :to="paths.join('/')"
+              v-else
+            >{{route.breadcrumbName}}</router-link>
           </template>
-        </a-breadcrumb>
+        </a-breadcrumb>-->
       </div>
 
-      <div class="item df" v-for="item in articlesList" :key="item._id">
+      <basic-breadcrumb />
+
+      <div
+        :key="item._id"
+        class="item df"
+        v-for="item in articlesList"
+      >
         <div class="avatar">
-          <a-avatar :size="36" :src="userInfo.USER_AVATAR" />
+          <a-avatar
+            :size="36"
+            :src="userInfo.USER_AVATAR"
+          />
         </div>
         <div class="flex1">
           <h3 class="title">
@@ -29,12 +39,25 @@
               <template slot="title">
                 <span>{{ createDate(item, 'tooltip') }}</span>
               </template>
-              <span><a-icon type="clock-circle" /> {{ createDate(item) }}</span>
+              <span>
+                <a-icon type="clock-circle" />
+                {{ createDate(item) }}
+              </span>
             </a-tooltip>
-            <span><a-icon type="eye" /> {{ item.views }}</span>
+            <span>
+              <a-icon type="eye" />
+              {{ item.views }}
+            </span>
             <div class="df-aic">
-              <a-icon type="tags" :style="{marginRight: '5px'}"/>
-              <a-tag class="tag" v-for="tag in item.tags" :key="tag._id">{{ tag.name }}</a-tag>
+              <a-icon
+                :style="{marginRight: '5px'}"
+                type="tags"
+              />
+              <a-tag
+                :key="tag._id"
+                class="tag"
+                v-for="tag in item.tags"
+              >{{ tag.name }}</a-tag>
             </div>
           </div>
         </div>
@@ -44,8 +67,8 @@
 </template>
 
 <script>
-import { themeColor } from '@/assets/styles/variables.scss'
 import FetchLoading from '@/components/loading'
+import BasicBreadcrumb from '@/components/breadcrumb'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
 import userConf from '@/config'
@@ -54,36 +77,31 @@ import routes from '@/router/routes'
 export default {
   name: 'ArticleList',
   components: {
-    FetchLoading
+    FetchLoading,
+    BasicBreadcrumb
   },
   props: ['name'],
-  data() {
+  data () {
     return {
       pageNum: 1,
       pageSize: 20,
-      
       articlesList: [],
-
-      
-      tagColor: themeColor,
-      
       userInfo: userConf(),
-
       routes
     }
   },
   computed: {
-    createDate() {
+    createDate () {
       return (item, v) => {
         return v ? dateFormat(item.create_time) : this.moment(item.create_time).fromNow()
       }
     }
   },
-  mounted() {
+  mounted () {
     this.getAllArticle()
   },
   methods: {
-    async getAllArticle() {
+    async getAllArticle () {
       const tagId = this.$route.query.tag_id
       this.$refs['fetch'].fetchData({
         api: articleList,
@@ -111,37 +129,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .article-tag-page {
-    @media screen and (max-width: 992px) {
-      padding: 0 60px;
+.article-tag-page {
+  @media screen and (max-width: 992px) {
+    padding: 0 60px;
+  }
+  @media screen and (max-width: 576px) {
+    padding: 0;
+  }
+  padding: 0 60px;
+  .item {
+    padding: 15px 0;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed #eee;
+    .avatar {
+      margin-right: 10px;
     }
-    @media screen and (max-width: 576px) {
-      padding: 0;
+    .title {
+      margin-bottom: 10px;
     }
-    padding: 0 100px;
-    .breadcrumb {
-      margin-bottom: 20px;
-    }
-    .item {
-      padding: 15px 0;
-      margin-bottom: 15px;
-      border-bottom: 1px dashed #eee;
-      .avatar {
+    .meta {
+      & > span {
         margin-right: 10px;
       }
-      .title {
-        margin-bottom: 10px;
-      }
-      .meta {
-        & > span {
-          margin-right: 10px;
-        }
-        .tag {
-          color: #666;
-          border: 1px solid transparent;
-          background-color: rgba($themeColor, .15);
-        }
+      .tag {
+        color: #666;
+        border: 1px solid transparent;
+        background-color: rgba($themeColor, 0.15);
       }
     }
   }
+}
 </style>

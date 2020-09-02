@@ -27,7 +27,6 @@ export default [{
       path: '/tag/:name',
       name: 'tagArticle',
       breadcrumbName: '',
-      // component: () => import('@/views/tag/ArticleList'),
       component: () => import('@/views/tag/ArticleList'),
       props: true
     }, {
