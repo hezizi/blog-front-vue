@@ -27,7 +27,7 @@
 
             <div v-else>
               <home-articles :article-list="aList" />
-              
+
               <!-- 分页 -->
               <div class="pagiation-wrapper" v-if="total > pageSize">
                 <a-pagination
@@ -140,7 +140,7 @@ export default {
         handleFn: result => cb(result)
       })
     },
-    
+
     /* 文章列表 */
     getList() {
       this.fetch(({ data, total }) => {
@@ -171,7 +171,7 @@ export default {
       this.commonFn('latest')
       // this.setLatest({ pageSize: 5, sortBy: 'latest' })
     },
-    
+
     /* 标签选择 */
     getSelectedTag(tag) {
       this.$set(this.params, 'tags', tag._id)
@@ -243,7 +243,7 @@ export default {
       }
     }
   }
-  
+
   /deep/ .ant-radio-checked .ant-radio-inner {
     border-color: $themeColor;
   }

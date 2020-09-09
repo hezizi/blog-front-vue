@@ -18,7 +18,7 @@
             {{ tag.name }}
           </a-tag>
         </div>
-        
+
         <!-- 描述 -->
         <p class="desc">{{ desc(item) }}</p>
         <div class="meta df-aic">
@@ -34,7 +34,7 @@
       <div class="cover-wrapper df-aic">
         <!-- 封面 -->
         <div class="cover">
-          <img :src="coverUrl(item)" class="w100" alt="cover">
+          <img v-lazy="coverUrl(item)" class="w100" alt="cover">
         </div>
       </div>
     </div>

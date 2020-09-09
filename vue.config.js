@@ -7,7 +7,13 @@ module.exports = {
   lintOnSave: false,
   chainWebpack: config => {
     config.resolve.alias
-      .set('@', resolve('src'));
+      .set('@', resolve('src'))
+    config.externals({
+      axios: 'axios',
+      moment: 'moment',
+      highlight: 'highlight',
+      marked: 'marked'
+    })
     // if (process.env.NODE_ENV === 'production') {
     //   config
     //   .plugin("compressionPlugin")
