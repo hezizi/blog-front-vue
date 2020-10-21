@@ -9,7 +9,7 @@ Vue.use(Router)
 
 /**
  * 添加这段代码用于处理该错误
- * vue-router.esm.js?8c4f:2007 
+ * vue-router.esm.js?8c4f:2007
  * Uncaught (in promise) NavigationDuplicated {_name: "NavigationDuplicated", name: "NavigationDuplicated"}
  */
 const originalPush = Router.prototype.push
