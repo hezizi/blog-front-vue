@@ -32,7 +32,6 @@ module.exports = {
       sass: {
         /**
          * 注意：在 sass-loader v8 中，这个选项名是 "prependData"
-         * 此项目 sass-loader 为 v7
          */
         data: `@import "~@/assets/styles/variables.scss";`
       }
