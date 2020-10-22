@@ -14,6 +14,11 @@ module.exports = {
       highlight: 'highlight',
       marked: 'marked'
     })
+
+    const svgRule = config.module.rule('svg')
+    svgRule.uses.clear()
+    svgRule.use('vue-svg-loader').loader('vue-svg-loader')
+
     // if (process.env.NODE_ENV === 'production') {
     //   config
     //   .plugin("compressionPlugin")

@@ -34,7 +34,7 @@
       <div class="cover-wrapper df-aic">
         <!-- 封面 -->
         <div class="cover">
-          <img v-lazy="coverUrl(item)" class="w100" alt="cover">
+          <img v-lazy="coverUrl(item)" class="w100" alt="cover" />
         </div>
       </div>
     </div>

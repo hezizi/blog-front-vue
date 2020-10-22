@@ -71,6 +71,7 @@
           <div class="head-label">
             <h2>和我交流</h2>
           </div>
+
         </div>
       </a-col>
     </a-row>
