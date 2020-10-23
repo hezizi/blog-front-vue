@@ -30,19 +30,19 @@ const USER_WX = {
 // 其他社区
 const OTHER_LINKS = [{
   title: 'Github',
-  icon: '',
+  icon: 'github',
   link: 'https://github.com/hezizi'
 }, {
   title: '掘金',
-  icon: '',
+  icon: 'juejin',
   link: 'https://juejin.im/user/59c126ce6fb9a00a3d134eea'
 }, {
   title: '思否',
-  icon: '',
+  icon: 'segmentfault',
   link: 'https://segmentfault.com/u/hezizi'
 }, {
   title: 'CSDN',
-  icon: '',
+  icon: 'csdn',
   link: 'https://blog.csdn.net/yucihent'
 }, {
   // title: '知乎',

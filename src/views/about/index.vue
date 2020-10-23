@@ -7,9 +7,9 @@
       </div>
       <p>{{ userInfo.USER_INTRODUCE }}</p>
 
-      <a-icon :component="require('@/icons/svg/segmentfault.svg')" />
-      <a-icon :component="require('@/icons/svg/juejin.svg')" />
-      <a-icon :component="require('@/icons/svg/github.svg')" />
+      <a-icon :component="require('@/icons/github.svg')" />
+      <svg-icon type="user" :style="{fontSize: '36px'}"/>
+
     </div>
 
     <div class="info mb30">
@@ -20,8 +20,11 @@
         <div class="mb15">
           <p>也可以在这些地方看到我：</p>
           <ul>
-            <li v-for="l in userInfo.OTHER_LINKS" :key="l.title">
-              <a target="blank" :href="l.link">{{ l.title }}</a>
+            <li v-for="link in userInfo.OTHER_LINKS" :key="link.title">
+              <a target="_blank" :href="link.link">
+                <svg-icon :icon-name="link.icon" />
+                {{ link.title }}
+              </a>
             </li>
           </ul>
         </div>
