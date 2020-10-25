@@ -130,9 +130,6 @@ export default {
 
 <style lang="scss" scoped>
 .article-tag-page {
-  @media screen and (max-width: 992px) {
-    padding: 0 60px;
-  }
   @media screen and (max-width: 576px) {
     padding: 0;
   }

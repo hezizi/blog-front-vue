@@ -6,10 +6,6 @@
         <h3>{{ userInfo.USER_NAME }}</h3>
       </div>
       <p>{{ userInfo.USER_INTRODUCE }}</p>
-
-      <a-icon :component="require('@/icons/github.svg')" />
-      <svg-icon type="user" :style="{fontSize: '36px'}"/>
-
     </div>
 
     <div class="info mb30">
@@ -17,24 +13,30 @@
       <a-divider orientation="left">关于我</a-divider>
       <div class="about mb30">
         <p>{{ userInfo.USER_DESC }}</p>
+
         <div class="mb15">
-          <p>也可以在这些地方看到我：</p>
-          <ul>
-            <li v-for="link in userInfo.OTHER_LINKS" :key="link.title">
-              <a target="_blank" :href="link.link">
-                <svg-icon :icon-name="link.icon" />
-                {{ link.title }}
-              </a>
+          <h4 class="sub-title">和我交流：</h4>
+          <ul class="wx-info df">
+            <li v-for="wx in userInfo.USER_WX" :key="wx.text">
+              <p>
+                <svg-icon :icon-name="wx.icon" />
+                <span>{{ wx.text }}</span>
+              </p>
+              <img :src="wx.img" alt="wx" :style="{height: '120px'}">
             </li>
           </ul>
         </div>
-        <div>
-          <p>和我交流：</p>
-          <p>{{ userInfo.USER_WX.wx }}</p>
-          <img :src="userInfo.USER_WX.wx_img" alt="wx" :style="{width: '120px', height: '120px'}">
 
-          <p>{{ userInfo.USER_WX.wxgzh }}</p>
-          <img :src="userInfo.USER_WX.wxgzh_img" alt="wxgzh" :style="{width: '120px', height: '120px'}">
+        <div>
+          <h4 class="sub-title">也可以在这些地方找到我：</h4>
+          <ul>
+            <li v-for="link in userInfo.OTHER_LINKS" :key="link.label">
+              <svg-icon :icon-name="link.icon" />
+              <a class="link" target="_blank" :href="link.link">
+                {{ link.label }}
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -42,7 +44,7 @@
       <a-divider orientation="left">关于博客</a-divider>
       <div class="about mb30">
         <p>博客申明：仅作个人学习，记录使用</p>
-        <p>源码：<a href="https://github.com/hezizi/blog-front-vue" target="_blank">Github地址</a></p>
+        <p>源码：<a class="link" href="https://github.com/hezizi/blog-front-vue" target="_blank">Github地址</a></p>
         <div>
           <p>技术栈：</p>
           <ul>
@@ -81,6 +83,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .mb15 {
+    margin-bottom: 15px;
+  }
+  .mb30 {
+    margin-bottom: 30px;
+  }
   .about-page {
     @media screen and (max-width: 992px) {
       padding: 0 60px;
@@ -88,16 +96,13 @@ export default {
     @media screen and (max-width: 576px) {
       padding: 0;
     }
-    a {
+    padding: 0 100px;
+    .link {
       color: $themeColor;
     }
-    .mb15 {
-      margin-bottom: 15px;
+    .icon {
+      margin-right: 5px;
     }
-    .mb30 {
-      margin-bottom: 30px;
-    }
-    padding: 0 100px;
     .author {
       @include flex($align: center, $direction: column);
       .name {
@@ -115,14 +120,27 @@ export default {
           padding: 0 15px;
         }
         padding-left: 25px;
-        p {
+        p, .sub-title {
           margin-bottom: 10px;
         }
         ul {
           padding-left: 30px;
           list-style: circle;
           li {
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+          }
+          &.wx-info {
+            @media screen and (max-width: 768px) {
+              display: inherit;
+              li:first-child {
+                margin-right: 0;
+              }
+            }
+            padding-left: 0;
+            list-style: none;
+            li:first-child {
+              margin-right: 80px;
+            }
           }
         }
       }

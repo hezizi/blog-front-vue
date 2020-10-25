@@ -19,7 +19,7 @@ export default {
 
 <style scoped>
 .icon {
-  width: 1.2em;
-  height: 1.2em;
+  /* width: 1.5em;
+  height: 1.5em; */
 }
 </style>

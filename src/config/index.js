@@ -16,41 +16,44 @@ const USER_DESC = `
   熟练掌握前端领域部分技术栈 API 的调用，目标是写 API 供他人调用；
   重度音乐爱好者，音乐串联我的故事；
   技术很水，但正在努力让自己不那么水；
-  有一个公众号，欢迎大家关注
+  有个公众号【前端仓库】，欢迎大家关注
 `
 
 // 微信 公众号
-const USER_WX = {
-  wx: '微信：KK1340599486',
-  wx_img: require('@/assets/images/wx.jpg'),
-  wxgzh: '微信公众号：前端仓库',
-  wxgzh_img: require('@/assets/images/wxgzh.jpg')
-}
+const USER_WX = [{
+  text: '微信：KK1340599486',
+  icon: 'weixin',
+  img: require('@/assets/images/wx.jpg')
+}, {
+  text: '微信公众号：【前端仓库】',
+  icon: 'weixingzh',
+  img: require('@/assets/images/wxgzh.png')
+}]
 
 // 其他社区
 const OTHER_LINKS = [{
-  title: 'Github',
+  label: 'Github',
   icon: 'github',
   link: 'https://github.com/hezizi'
 }, {
-  title: '掘金',
+  label: '掘金',
   icon: 'juejin',
   link: 'https://juejin.im/user/59c126ce6fb9a00a3d134eea'
 }, {
-  title: '思否',
+  label: '思否',
   icon: 'segmentfault',
   link: 'https://segmentfault.com/u/hezizi'
 }, {
-  title: 'CSDN',
+  label: 'CSDN',
   icon: 'csdn',
   link: 'https://blog.csdn.net/yucihent'
 }, {
-  // title: '知乎',
-  // icon: '',
-  // link: ''
+  label: '知乎',
+  icon: 'zhihu',
+  link: ''
 }, {
-  title: '简书',
-  icon: '',
+  label: '简书',
+  icon: 'jianshu',
   link: 'https://www.jianshu.com/u/c1096b3b83eb'
 }]
 
