@@ -22,7 +22,7 @@
                 <svg-icon :icon-name="wx.icon" />
                 <span>{{ wx.text }}</span>
               </p>
-              <img :src="wx.img" alt="wx" :style="{height: '120px'}">
+              <img :src="wx.img" alt="wx" :style="{height: '120px'}" />
             </li>
           </ul>
         </div>
