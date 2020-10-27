@@ -1,6 +1,6 @@
 <template>
   <footer class="footer-wrapper w100">
-    <h4>Yucihzz'Blog ©2020 Created by 赫子子</h4>
+    <h4>Yucihzz'Blog ©{{ date }} Created by 赫子子</h4>
     <a class="link" target="blank" href="http://www.beian.miit.gov.cn">鄂ICP备20004755号-1</a>
   </footer>
 </template>
@@ -10,7 +10,12 @@ export default {
   name: 'Footer',
   data() {
     return {
-      
+      currentYear: new Date().getFullYear()
+    }
+  },
+  computed: {
+    date() {
+      return this.currentYear === 2020 ? 2020 : `2020-${this.currentYear}`
     }
   }
 }

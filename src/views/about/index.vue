@@ -1,23 +1,23 @@
 <template>
   <div class="about-page">
     <div class="author mb30">
-      <a-avatar :size="80" :src="userInfo.USER_AVATAR" />
+      <a-avatar :size="80" :src="userConfig.USER_AVATAR" />
       <div class="name">
-        <h3>{{ userInfo.USER_NAME }}</h3>
+        <h3>{{ userConfig.USER_NAME }}</h3>
       </div>
-      <p>{{ userInfo.USER_INTRODUCE }}</p>
+      <p>{{ userConfig.USER_INTRODUCE }}</p>
     </div>
 
     <div class="info mb30">
       <!-- 关于我 -->
       <a-divider orientation="left">关于我</a-divider>
       <div class="about mb30">
-        <p>{{ userInfo.USER_DESC }}</p>
+        <p>{{ userConfig.USER_DESC }}</p>
 
         <div class="mb15">
           <h4 class="sub-title">和我交流：</h4>
           <ul class="wx-info df">
-            <li v-for="wx in userInfo.USER_WX" :key="wx.text">
+            <li v-for="wx in userConfig.USER_WX" :key="wx.text">
               <p>
                 <svg-icon :icon-name="wx.icon" />
                 <span>{{ wx.text }}</span>
@@ -30,7 +30,7 @@
         <div>
           <h4 class="sub-title">也可以在这些地方找到我：</h4>
           <ul>
-            <li v-for="link in userInfo.OTHER_LINKS" :key="link.label">
+            <li v-for="link in userConfig.OTHER_LINKS" :key="link.label">
               <svg-icon :icon-name="link.icon" />
               <a class="link" target="_blank" :href="link.link">
                 {{ link.label }}
@@ -73,12 +73,12 @@
 
 <script>
 import Comment from '@/components/comment'
-import userConf from '@/config'
+import userConfig from '@/config'
 
 export default {
   name: 'AboutMe',
   components: { Comment },
-  data: () => ({ userInfo: userConf() })
+  data: () => ({ userConfig })
 }
 </script>
 

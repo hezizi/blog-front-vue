@@ -69,17 +69,16 @@ const GITHUB = {
  * 评论头像
  */
 import { getStorage } from '@/utils/storage'
-const COMMIT_AVATAR = getStorage('GITHUB_INFO') && getStorage('GITHUB_INFO').github.avatar_url
+const COMMENT_AVATAR = getStorage('GITHUB_INFO') && getStorage('GITHUB_INFO').github.avatar_url
 
-const appConfig = () => ({
+
+export default {
   USER_AVATAR,
   USER_NAME,
   USER_INTRODUCE,
   USER_DESC,
   USER_WX,
   OTHER_LINKS,
-  COMMIT_AVATAR,
+  COMMENT_AVATAR,
   GITHUB
-})
-
-export default appConfig
+}

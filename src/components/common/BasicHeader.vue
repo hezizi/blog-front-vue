@@ -11,12 +11,12 @@
       <div class="df-aic">
         <!-- navbar -->
         <ul class="navbar df">
-          <li 
+          <li
             v-for="item in navBarList"
             :key="item.to"
             :class="{ 'active': item.to === activeClass }"
             @click="handleJump(item.to)">
-            <a-icon 
+            <a-icon
               :type="item.icon"
               :style="{'margin-right': '3px'}" />
             {{ item.name }}
@@ -26,8 +26,8 @@
 
         <!-- github login -->
         <div class="github-login">
-          <div class="user df-aic" v-if="githubInfo.COMMIT_AVATAR">
-            <a-avatar :src="githubInfo.COMMIT_AVATAR" />
+          <div class="user df-aic" v-if="githubConfig.COMMENT_AVATAR">
+            <a-avatar :src="githubConfig.COMMENT_AVATAR" />
             <a-icon
               @click="logout"
               type="logout"
@@ -46,7 +46,7 @@
 
 <script>
 import { mapActions } from 'vuex'
-import appConfig from '@/config'
+import githubConfig from '@/config'
 
 export default {
   name: 'Header',
@@ -70,8 +70,7 @@ export default {
         icon: 'user',
         to: '/about'
       }],
-
-      githubInfo: appConfig()
+      githubConfig
     }
   },
   watch: {
@@ -105,7 +104,7 @@ export default {
         okText: '确认',
         cancelText: '取消',
         onOk: () => {
-          const { auth_url, client_id } = this.githubInfo.GITHUB
+          const { auth_url, client_id } = this.githubConfig.GITHUB
           window.location.href = `${auth_url}?client_id=${client_id}&scope=read:user`
         }
       })
@@ -117,7 +116,7 @@ export default {
       this.logoutAction().then(res => {
         this.$message.success(res, 1.5)
         // window.location.href = '/'
-        
+
         setTimeout(() => {
           window.location.reload()
         }, 500)

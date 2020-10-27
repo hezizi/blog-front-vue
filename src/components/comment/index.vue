@@ -37,8 +37,8 @@
 <script>
 import { mapGetters } from 'vuex'
 import CommentList from './list'
-import { comment, commentList } from '@/services/api'
-import conf from '@/config'
+import { comment } from '@/services/api'
+import config from '@/config'
 
 export default {
   name: 'Comment',
@@ -47,7 +47,7 @@ export default {
     return {
       value: '',  // 留言
       submitting: false,
-      userAvatar: conf().COMMIT_AVATAR,
+      userAvatar: config.COMMENT_AVATAR,
     }
   },
   computed: {
@@ -61,14 +61,14 @@ export default {
         this.value = ''
         return
       }
-      
+
       if (!this.value) return
 
       this.submitting = true
       comment({ userId: this.userInfo.user_id, content: this.value })
         .then(res => {
           this.$message.success(res.message, 1.5)
-          
+
           this.$refs['commlist'].commListApi(true)
         })
         .finally(() => {
