@@ -27,7 +27,7 @@
         <div class="avatar">
           <a-avatar
             :size="36"
-            :src="userInfo.USER_AVATAR"
+            :src="userConfig.USER_AVATAR"
           />
         </div>
         <div class="flex1">
@@ -71,7 +71,7 @@ import FetchLoading from '@/components/loading'
 import BasicBreadcrumb from '@/components/breadcrumb'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
-import userConf from '@/config'
+import userConfig from '@/config'
 import routes from '@/router/routes'
 
 export default {
@@ -86,7 +86,7 @@ export default {
       pageNum: 1,
       pageSize: 20,
       articlesList: [],
-      userInfo: userConf(),
+      userConfig,
       routes
     }
   },

@@ -11,7 +11,7 @@
               </div>
               <div class="meta df-aic">
                 <div class="avatar">
-                  <a-avatar :size="50" :src="userInfo.USER_AVATAR" />
+                  <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
                 </div>
                 <div class="author-info flex1">
                   <div class="author-name">
@@ -52,7 +52,7 @@ import ArticleAnchor from '@/components/anchor'
 import FetchLoading from '@/components/loading'
 import { markdownToHtml, dateFormat } from '@/utils'
 import { articleDetail } from '@/services/api'
-import userConf from '@/config'
+import userConfig from '@/config'
 import '@/assets/styles/markdown.scss'
 
 export default {
@@ -73,8 +73,8 @@ export default {
         tags: []
       },
       tagColor: themeColor,
-      
-      userInfo: userConf()
+
+      userConfig
     }
   },
   computed: {

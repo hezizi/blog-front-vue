@@ -3,7 +3,8 @@
     <div class="article-item df" v-for="item in articleList" :key="item._id">
       <router-link
         :to="{ name: 'article', params: { articleId: item._id } }"
-        class="link" />
+        class="link"
+      />
       <div class="flex1">
         <!-- 标题 -->
         <h3 class="title">{{ item.title }}</h3>
@@ -136,7 +137,9 @@ export default {
         margin-left: 10px;
       }
       .cover {
+        overflow: hidden;
         width: 200px;
+        border-radius: 4px;
         @media screen and (max-width: 576px) {
           width: 160px;
         }

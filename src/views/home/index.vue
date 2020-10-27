@@ -5,6 +5,7 @@
         <!-- 标签列表 -->
         <div class="wrapper-item">
           <div class="head-label">
+            <svg-icon icon-name="tags" />
             <h2>文章标签</h2>
           </div>
           <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
@@ -13,7 +14,10 @@
         <div class="wrapper-item">
           <!-- 文章列表 -->
           <div class="head-label article-title">
-            <h2>全部文章</h2>
+            <div class="df">
+              <svg-icon icon-name="article" />
+              <h2>全部文章</h2>
+            </div>
             <a-radio-group @change="handleRadioChange" v-model="radioVal">
               <a-radio value="latest">最新</a-radio>
               <a-radio value="hottest">最热</a-radio>
@@ -47,11 +51,16 @@
         <!-- 推荐 最新 -->
         <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
           <div class="head-label">
+            <svg-icon icon-name="hot" />
             <h2>{{ item.title }}</h2>
           </div>
           <div class="list">
             <ul>
-              <li v-for="p in (item.label === 'hottest' ? hottest : latest)" :key="p._id">
+              <li
+                v-for="(p, index) in (item.label === 'hottest' ? hottest : latest)"
+                :key="p._id"
+                :data-index="index + 1"
+              >
                 <router-link
                   :to="{ name: 'article', params: { articleId: p._id } }"
                   class="link">
@@ -67,12 +76,15 @@
         </div>
 
         <!-- 和我交流 -->
-        <div class="wrapper-item">
-          <div class="head-label">
-            <h2>和我交流</h2>
+        <a-affix :offset-top="offsetTop">
+          <div class="wrapper-item">
+            <div class="head-label">
+              <svg-icon icon-name="focus" />
+              <h2>关注你啦</h2>
+            </div>
+            <img :src="userConfig.USER_WX[1].img" alt="wxgzh" :style="{width: '100%'}" />
           </div>
-
-        </div>
+        </a-affix>
       </a-col>
     </a-row>
   </div>
@@ -84,6 +96,7 @@ import HomeArticles from '@/components/article'
 import HomeTags from '@/components/tag'
 import FetchLoading from '@/components/loading'
 import { articleList } from '@/services/api'
+import userConfig from '@/config'
 
 export default {
   name: 'Home',
@@ -94,6 +107,7 @@ export default {
   },
   data() {
     return {
+      userConfig,
       /* article */
       aList: [],    // 文章列表
       hottest: [],  // 最热
@@ -111,10 +125,13 @@ export default {
       wrapperList: [{
         title: '推荐文章',
         label: 'hottest'
-      }, {
-        title: '最新文章',
-        label: 'latest'
-      }]
+      }
+      // {
+      //   title: '最新文章',
+      //   label: 'latest'
+      // }
+      ],
+      offsetTop: 90
     }
   },
   computed: {
@@ -123,7 +140,7 @@ export default {
   mounted() {
     this.getList()
     this.getHottest()
-    this.getLatest()
+    // this.getLatest()
   },
   methods: {
     ...mapActions(['setHottest', 'setLatest']),
@@ -160,7 +177,7 @@ export default {
     /* 热门文章 */
     commonFn(arg) {
       this.$set(this.params, 'sortBy', arg)
-      this.fetch(result => this[arg] = result.data, 5)
+      this.fetch(result => this[arg] = result.data, 10)
     },
     getHottest() {
       this.commonFn('hottest')
@@ -169,7 +186,7 @@ export default {
 
     /* 最新文章 */
     getLatest() {
-      this.commonFn('latest')
+      // this.commonFn('latest')
       // this.setLatest({ pageSize: 5, sortBy: 'latest' })
     },
 
@@ -194,23 +211,22 @@ export default {
     @include flex;
     .wrapper-item {
       margin-bottom: 35px;
+      &:last-child {
+        margin-bottom: 0;
+      }
       .head-label {
-        position: relative;
-        padding: 0 0 10px 15px;
+        @include flex($align: center);
+        padding-bottom: 5px;
         margin-bottom: 15px;
         border-bottom: 1px dashed #eee;
-        line-height: 24px;
+        .icon {
+          font-size: 1.8em;
+          margin-right: 6px;
+        }
         h2 {
           margin: 0;
           font-size: 18px;
           font-weight: bold;
-        }
-        &:before {
-          content: "#";
-          position: absolute;
-          left: 0;
-          top: 0;
-          font-size: 20px;
         }
       }
       .pagiation-wrapper {
@@ -222,12 +238,12 @@ export default {
       @include flex($justify: space-between, $align: center);
     }
     .list {
-      border-radius: 2px;
-      padding: 0 10px;
       ul {
         li {
           @include flex($align: center);
+          position: relative;
           margin-bottom: 15px;
+          padding-left: 26px;
           .link {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -239,6 +255,38 @@ export default {
           }
           &:last-child {
             margin-bottom: 0;
+          }
+          &::after {
+            @include flex($justify: center, $align: center);
+            content: attr(data-index);
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border: 1px solid rgba(51, 51, 51, .3);
+            border-radius: 2px;
+            color: rgba(51, 51, 51, .6);
+            font-size: 12px;
+            font-style: italic;
+          }
+          &[data-index="1"]::after,
+          &[data-index="2"]::after,
+          &[data-index="3"]::after {
+            color: #fff;
+          }
+          &[data-index="1"]::after {
+            background-color: #d4533e;
+            border-color: #d4533e;
+          }
+          &[data-index="2"]::after {
+            background-color: #e78d22;
+            border-color: #e78d22;
+          }
+          &[data-index="3"]::after {
+            background-color: #2a64da;
+            border-color: #2a64da;
           }
         }
       }
