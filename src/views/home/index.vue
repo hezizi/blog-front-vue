@@ -5,7 +5,7 @@
         <!-- 标签列表 -->
         <div class="wrapper-item">
           <div class="head-label">
-            <svg-icon icon-name="tags" />
+            <svg-icon icon-name="tag" />
             <h2>文章标签</h2>
           </div>
           <home-tags :tag-list="allTags" @tagClick="getSelectedTag" />
@@ -220,7 +220,7 @@ export default {
         margin-bottom: 15px;
         border-bottom: 1px dashed #eee;
         .icon {
-          font-size: 1.7em;
+          font-size: 1.8em;
           margin-right: 6px;
         }
         h2 {
