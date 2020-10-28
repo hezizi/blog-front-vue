@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
-    <a-row :gutter="36" class="flex1">
-      <a-col :lg="18" :md="16">
+    <a-row :gutter="30">
+      <a-col :lg="17" :md="16">
         <!-- 标签列表 -->
         <div class="wrapper-item">
           <div class="head-label">
@@ -47,7 +47,7 @@
         </div>
       </a-col>
 
-      <a-col :lg="6" :md="8">
+      <a-col :lg="7" :md="8">
         <!-- 推荐 最新 -->
         <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
           <div class="head-label">
@@ -220,7 +220,7 @@ export default {
         margin-bottom: 15px;
         border-bottom: 1px dashed #eee;
         .icon {
-          font-size: 1.8em;
+          font-size: 1.7em;
           margin-right: 6px;
         }
         h2 {
@@ -243,7 +243,7 @@ export default {
           @include flex($align: center);
           position: relative;
           margin-bottom: 15px;
-          padding-left: 26px;
+          padding-left: 32px;
           .link {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -260,7 +260,7 @@ export default {
             @include flex($justify: center, $align: center);
             content: attr(data-index);
             position: absolute;
-            left: 0;
+            left: 5px;
             top: 50%;
             transform: translateY(-50%);
             width: 18px;

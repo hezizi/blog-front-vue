@@ -31,7 +31,7 @@ export default {
         padding-top: 150px;
       }
       @include layout;
-      padding: 100px 20px 30px;
+      padding: 100px 20px 60px;
       min-height: calc(100% - #{$footerHeight});
     }
   }
