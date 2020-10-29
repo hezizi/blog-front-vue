@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <a-row :gutter="30">
+    <a-row :gutter="30" class="flex1">
       <a-col :lg="17" :md="16">
         <!-- 标签列表 -->
         <div class="wrapper-item">
@@ -30,7 +30,7 @@
             </div>
 
             <div v-else>
-              <home-articles :article-list="aList" />
+              <home-articles :article-list="postList" />
 
               <!-- 分页 -->
               <div class="pagiation-wrapper" v-if="total > pageSize">
@@ -49,7 +49,7 @@
 
       <a-col :lg="7" :md="8">
         <!-- 推荐 最新 -->
-        <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
+        <!-- <div class="wrapper-item" v-for="item in wrapperList" :key="item.label">
           <div class="head-label">
             <svg-icon icon-name="hot" />
             <h2>{{ item.title }}</h2>
@@ -73,6 +73,33 @@
               </li>
             </ul>
           </div>
+        </div> -->
+        <div class="wrapper-item">
+          <div class="head-label">
+            <svg-icon icon-name="hot" />
+            <h2>推荐文章</h2>
+          </div>
+          <fetch-loading ref="fetchHot">
+            <div class="list">
+              <ul>
+                <li
+                  v-for="(p, index) in hottest"
+                  :key="p._id"
+                  :data-index="index + 1"
+                >
+                  <router-link
+                    :to="{ name: 'article', params: { articleId: p._id } }"
+                    class="link">
+                    {{ p.title }}
+                  </router-link>
+                  <span class="views df-aic">
+                    <a-icon type="eye" :style="{marginRight: '5px'}"/>
+                    {{ p.views }}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </fetch-loading>
         </div>
 
         <!-- 和我交流 -->
@@ -91,7 +118,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 import HomeArticles from '@/components/article'
 import HomeTags from '@/components/tag'
 import FetchLoading from '@/components/loading'
@@ -109,9 +136,9 @@ export default {
     return {
       userConfig,
       /* article */
-      aList: [],    // 文章列表
+      postList: [],    // 文章列表
       hottest: [],  // 最热
-      latest: [],   // 最新
+      // latest: [],   // 最新
       // 分页
       pageNum: 1,
       pageSize: 15,
@@ -122,15 +149,13 @@ export default {
         sortBy: 'latest'
       },
       radioVal: 'latest',
-      wrapperList: [{
-        title: '推荐文章',
-        label: 'hottest'
-      }
-      // {
+      // wrapperList: [{
+      //   title: '推荐文章',
+      //   label: 'hottest'
+      // }, {
       //   title: '最新文章',
       //   label: 'latest'
-      // }
-      ],
+      // }],
       offsetTop: 90
     }
   },
@@ -143,11 +168,9 @@ export default {
     // this.getLatest()
   },
   methods: {
-    ...mapActions(['setHottest', 'setLatest']),
-
     /* 数据获取 */
-    fetch(cb, size) {
-      this.$refs['fetch'].fetchData({
+    fetch(cb, size, ref = 'fetch') {
+      this.$refs[ref].fetchData({
         api: articleList,
         params: {
           pageNum: this.pageNum,
@@ -162,7 +185,7 @@ export default {
     /* 文章列表 */
     getList() {
       this.fetch(({ data, total }) => {
-        this.aList = data
+        this.postList = data
         this.total = total
         this.isEmpty = !this.total && true
       }, this.pageSize)
@@ -177,18 +200,16 @@ export default {
     /* 热门文章 */
     commonFn(arg) {
       this.$set(this.params, 'sortBy', arg)
-      this.fetch(result => this[arg] = result.data, 10)
+      this.fetch(result => this[arg] = result.data, 10, 'fetchHot')
     },
     getHottest() {
       this.commonFn('hottest')
-      // this.setHottest({ pageSize: 5, sortBy: 'hottest' })
     },
 
     /* 最新文章 */
-    getLatest() {
-      // this.commonFn('latest')
-      // this.setLatest({ pageSize: 5, sortBy: 'latest' })
-    },
+    // getLatest() {
+    //   this.commonFn('latest')
+    // },
 
     /* 标签选择 */
     getSelectedTag(tag) {
