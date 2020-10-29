@@ -20,10 +20,9 @@ module.exports = {
       vue: 'Vue',
       'vue-router': 'VueRouter',
       vuex: 'Vuex',
-      axios: 'axios',
-      moment: 'moment',
+      // axios: 'axios',
       // highlight: 'highlight',
-      marked: 'marked'
+      // marked: 'marked'
     })
 
     const svgRule = config.module.rule('svg')

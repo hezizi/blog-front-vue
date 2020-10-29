@@ -85,7 +85,7 @@ export default {
           author: item.user_github.github.name,
           avatar: item.user_github.github.avatar_url,
           content: item.content,
-          datetime: this.moment(item.create_time).fromNow()
+          datetime: this.dayjs(item.create_time).fromNow()
         }))
         this.commList = isAdd ? list : [ ...this.commList, ...list ]
       }).finally(() => {

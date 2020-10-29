@@ -6,9 +6,11 @@ import store from './store'
 import SvgIcon from '@/components/icon'
 import { getStorage } from '@/utils/storage'
 
-import moment from 'moment'
-moment.locale('zh-cn')
-Vue.prototype.moment = moment
+import dayjs from 'dayjs'
+const relativeTime = require('dayjs/plugin/relativeTime')
+dayjs.locale('zh-cn')
+dayjs.extend(relativeTime)
+Vue.prototype.dayjs = dayjs
 
 import VueLazyload from 'vue-lazyload'
 // import Antd from 'ant-design-vue/es'

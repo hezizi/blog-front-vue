@@ -58,7 +58,7 @@ export default {
     // createDate: () => item => dateFormat(item.create_time),
     createDate() {
       return (item, v) => {
-        return v ? dateFormat(item.create_time) : this.moment(item.create_time).fromNow()
+        return v ? dateFormat(item.create_time) : this.dayjs(item.create_time).fromNow()
       }
     },
     coverUrl: () => item => {
