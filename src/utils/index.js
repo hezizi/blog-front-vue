@@ -1,3 +1,5 @@
+import marked from 'marked'
+import hljs from 'highlight'
 import dayjs from 'dayjs'
 
 /* markdown转html */

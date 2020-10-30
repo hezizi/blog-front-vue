@@ -72,7 +72,7 @@ import BasicBreadcrumb from '@/components/breadcrumb'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
 import userConfig from '@/config'
-import routes from '@/router/routes'
+// import routes from '@/router/routes'
 
 export default {
   name: 'ArticleList',
@@ -87,7 +87,7 @@ export default {
       pageSize: 20,
       articlesList: [],
       userConfig,
-      routes
+      // routes
     }
   },
   computed: {
