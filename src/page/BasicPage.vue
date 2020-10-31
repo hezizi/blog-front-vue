@@ -15,12 +15,7 @@
 
 <script>
 export default {
-  name: 'BasicPage',
-  data() {
-    return {
-      
-    }
-  }
+  name: 'BasicPage'
 }
 </script>
 

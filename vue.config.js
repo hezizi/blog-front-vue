@@ -8,7 +8,7 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
-      .set('@ant-design/icons/lib/dist$', resolve('./src/icons.js'))
+      .set('@ant-design/icons/lib/dist$', resolve('src/icons/index.js'))
     config.externals({
       vue: 'Vue',
       'vue-router': 'VueRouter',

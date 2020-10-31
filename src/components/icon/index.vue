@@ -1,5 +1,5 @@
 <template>
-  <a-icon v-if="iconName" class="icon" :component="require(`@/icons/${iconName}.svg`)" />
+  <a-icon v-if="iconName" class="icon" :component="require(`@/icons/svgs/${iconName}.svg`)" />
   <a-icon v-else class="icon" :type="type" />
 </template>
 
@@ -18,8 +18,8 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-  /* width: 1.5em;
-  height: 1.5em; */
-}
+/* .icon {
+  width: 1.5em;
+  height: 1.5em;
+} */
 </style>

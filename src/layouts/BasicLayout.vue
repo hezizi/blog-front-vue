@@ -20,29 +20,15 @@
 </template>
 
 <script>
-import BasicPage from '@/page/BasicPage'
-import RouterLayout from './RouterLayout'
 import { BasicHeader, BasicFooter } from '@/components/common'
 
 export default {
   name: 'BasicLayout',
-  components: { 
-    BasicPage, 
-    RouterLayout,
+  components: {
+    BasicPage: () => import('@/page/BasicPage'),
+    RouterLayout: () => import('./RouterLayout'),
     BasicHeader,
     BasicFooter
-  },
-  data() {
-    return {
-      
-    }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .basic-layout {
-    // min-height: 100vh;
-    // height: 100vh;
-  }
-</style>

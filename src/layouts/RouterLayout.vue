@@ -1,15 +1,26 @@
 <template>
   <transition name="router" mode="out-in">
-    <!-- <keep-alive include="Home">
+    <template v-if="keepAliveRouter">
+      <keep-alive> 
+        <router-view />
+      </keep-alive>
+    </template>
+
+    <template v-else>
       <router-view />
-    </keep-alive> -->
-    <router-view />
+    </template>
   </transition>
 </template>
 
 <script>
 export default {
-  name: 'RouterLayout'
+  name: 'RouterLayout',
+  computed: {
+    keepAliveRouter() {
+      const { keepAlive = true } = this.$route.meta
+      return keepAlive
+    }
+  }
 }
 </script>
 

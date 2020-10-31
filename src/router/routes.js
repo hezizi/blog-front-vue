@@ -7,44 +7,62 @@ export default [{
     {
       path: '/',
       name: 'home',
-      breadcrumbName: 'Home',
-      component: () => import('@/views/home')
+      component: () => import('@/views/home'),
+      meta: {
+        // breadcrumb: 'Home'
+        keepAlive: false
+      }
     }, {
       // 文章详情
       path: '/article/:articleId',
       name: 'article',
-      breadcrumbName: '文章',
       component: () => import('@/views/article'),
-      props: true
+      props: true,
+      meta: {
+        // breadcrumb: '文章',
+        keepAlive: false
+      }
     }, {
       // 标签
-      path: '/tag/',
+      path: '/tag',
       name: 'tag',
-      breadcrumbName: '标签',
-      component: () => import('@/views/tag')
+      component: () => import('@/views/tag'),
+      meta: {
+        // breadcrumb: '标签'
+      }
     }, {
       // 标签
       path: '/tag/:name',
       name: 'tagArticle',
-      breadcrumbName: '',
+      breadcrumb: '',
       component: () => import('@/views/tag/ArticleList'),
-      props: true
+      props: true,
+      meta: {
+        keepAlive: false
+      }
     }, {
       // 归档
       path: '/archive',
       name: 'archive',
-      breadcrumbName: '归档',
-      component: () => import('@/views/archive')
+      component: () => import('@/views/archive'),
+      meta: {
+        // breadcrumb: '归档'
+      }
     }, {
       // 关于
       path: '/about',
       name: 'about',
-      breadcrumbName: '关于',
-      component: () => import('@/views/about')
+      component: () => import('@/views/about'),
+      meta: {
+        breadcrumb: '关于'
+      }
     }, {
       path: '/auth',
       name: 'auth',
-      component: () => import('@/components/github-auth')
+      component: () => import('@/components/github-auth'),
+      meta: {
+        keepAlive: false
+      }
     }
   ]
 }, {
