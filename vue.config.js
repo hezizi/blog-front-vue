@@ -5,17 +5,10 @@ const CompressionPlugin = require("compression-webpack-plugin")
 module.exports = {
   productionSourceMap: false,
   lintOnSave: false,
-  configureWebpack: {
-    resolve: {
-       alias: {
-         '@ant-design/icons/lib/dist$': resolve('./src/icons.js')
-       }
-    }
-  },
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src'))
-
+      .set('@ant-design/icons/lib/dist$', resolve('./src/icons.js'))
     config.externals({
       vue: 'Vue',
       'vue-router': 'VueRouter',

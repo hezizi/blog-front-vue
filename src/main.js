@@ -24,6 +24,7 @@ import {
   Tooltip,
   Breadcrumb,
   Comment,
+  List,
   Avatar,
   Button,
   Icon,
@@ -37,6 +38,8 @@ import {
   Pagination,
   Affix,
   Badge,
+  Divider,
+  Empty,
   message
 } from 'ant-design-vue'
 
@@ -46,6 +49,7 @@ Vue.use(Tag)
 Vue.use(Tooltip)
 Vue.use(Breadcrumb)
 Vue.use(Comment)
+Vue.use(List)
 Vue.use(Avatar)
 Vue.use(Button)
 Vue.use(Icon)
@@ -59,6 +63,8 @@ Vue.use(Radio)
 Vue.use(Pagination)
 Vue.use(Affix)
 Vue.use(Badge)
+Vue.use(Divider)
+Vue.use(Empty)
 Vue.prototype.$message = message
 // import { message, Icon, BackTop, Skeleton, Tag } from 'ant-design-vue'
 

@@ -104,7 +104,7 @@
 
         <!-- 和我交流 -->
         <a-affix :offset-top="offsetTop">
-          <div class="wrapper-item">
+          <div class="wrapper-item mb0">
             <div class="head-label">
               <svg-icon icon-name="focus" />
               <h2>关注你啦</h2>
@@ -136,9 +136,9 @@ export default {
     return {
       userConfig,
       /* article */
-      postList: [],    // 文章列表
-      hottest: [],  // 最热
-      // latest: [],   // 最新
+      postList: [],     // 文章列表
+      hottest: [],      // 最热
+      // latest: [],    // 最新
       // 分页
       pageNum: 1,
       pageSize: 15,
@@ -232,7 +232,7 @@ export default {
     @include flex;
     .wrapper-item {
       margin-bottom: 35px;
-      &:last-child {
+      &.mb0 {
         margin-bottom: 0;
       }
       .head-label {
@@ -252,7 +252,7 @@ export default {
       }
       .pagiation-wrapper {
         @include flex($justify: flex-end);
-        margin-top: 60px;
+        margin-top: 30px;
       }
     }
     .article-title {
