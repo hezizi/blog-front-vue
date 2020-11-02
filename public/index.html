@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/styles/atom-one-dark.min.css" integrity="sha512-Fcqyubi5qOvl+yCwSJ+r7lli+CO1eHXMaugsZrnxuU4DVpLYWXTVoHy55+mCb4VZpMgy7PBhV7IiymC0yu9tkQ==" crossorigin="anonymous" />
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
+      <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" />
+    <% } %>
     <title>赫子子的博客</title>
   </head>
   <body>
@@ -13,12 +15,19 @@
       <strong>We're sorry but blog-front doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" integrity="sha512-PwQ5+jgXxxprNGc80ycHE3spgj6TuDieHe/yTkbEJ+U5aol7dTupi/4VbwHHzlQVW77Vb0GLOIsiYigHgC5vcg==" crossorigin="anonymous"></script>
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+      <script
+        type="text/javascript"
+        src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
+      ></script>
+    <% } %>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js" integrity="sha512-PwQ5+jgXxxprNGc80ycHE3spgj6TuDieHe/yTkbEJ+U5aol7dTupi/4VbwHHzlQVW77Vb0GLOIsiYigHgC5vcg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.3/vue-router.min.js" integrity="sha512-b/eFNKCbVglOlOkrIXw3r42RxcQbnm3Kei9oENeBCslmvR25dYZBgV/8AC5WNHQKjASzu6hQjfhD1EYkHw9usg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js" integrity="sha512-zybwL6xp1wqU0npOL4cJ2xNXm/oeEEMMl5UVFKgG0wTmecSY5tyWPr3wmvDl76qF+a78tLoLqOeyNWZw4QSjqg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.7.0/marked.min.js" integrity="sha512-lS8TP+YpY3cAzofQNSyGyEdGyl8SQMS1M3ml7tIFGYoIYFQp5sTGr6UIGV59m4oe4nREaXtT5uQ8XODEcjAnGw==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script> -->
 
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/languages/javascript.min.js" integrity="sha512-0Mx6QSLEYBBcG/wzgKUdamRKjPAYswJBvINlgsb2ILFBXnj+GeE2nhu0w11MHx/lkmqih7vmV9JhXxj5ZjpQ7Q==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/languages/typescript.min.js" integrity="sha512-rIFmGN3IG5Xb9fT3F/aNo2XDOSTdP4xz5vY5hHLK38pjsFMS2rLzeGI8gq5aNKCkWXztDbaGpHps3fXSoFgUfg==" crossorigin="anonymous"></script>
