@@ -12,7 +12,7 @@
       <!-- 关于我 -->
       <a-divider orientation="left">关于我</a-divider>
       <div class="about mb30">
-        <p>{{ userConfig.USER_DESC }}</p>
+        <p class="desc">{{ userConfig.USER_DESC }}</p>
 
         <div class="mb15">
           <h4 class="sub-title">和我交流：</h4>
@@ -28,7 +28,7 @@
         </div>
 
         <div>
-          <h4 class="sub-title">也可以在这些地方找到我：</h4>
+          <h4 class="sub-title">😉😆也可以在这些地方找到我：</h4>
           <ul>
             <li v-for="link in userConfig.OTHER_LINKS" :key="link.label">
               <svg-icon :icon-name="link.icon" />
@@ -120,6 +120,9 @@ export default {
           padding: 0 15px;
         }
         padding-left: 25px;
+        .desc {
+          text-indent: 20px;
+        }
         p, .sub-title {
           margin-bottom: 10px;
         }

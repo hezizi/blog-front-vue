@@ -12,7 +12,6 @@
         </div>
 
         <div class="wrapper-item">
-          <!-- 文章列表 -->
           <div class="head-label article-title">
             <div class="df">
               <svg-icon icon-name="article" />
@@ -23,6 +22,8 @@
               <a-radio value="hottest">最热</a-radio>
             </a-radio-group>
           </div>
+
+          <!-- 文章列表 -->
           <fetch-loading ref="fetch">
             <!-- 暂无数据 -->
             <div v-if="isEmpty">
@@ -31,19 +32,16 @@
 
             <div v-else>
               <home-articles :article-list="postList" />
-
-              <!-- 分页 -->
-              <div class="pagiation-wrapper" v-if="total > pageSize">
-                <a-pagination
-                  :current="pageNum"
-                  :total="total"
-                  :page-size="pageSize"
-                  :showTotal="(total, range) =>`${range[0]} - ${range[1]} 共 ${total} 篇文章`"
-                  @change="onPagerChange"
-                />
-              </div>
             </div>
           </fetch-loading>
+
+          <!-- pagination -->
+          <div class="pagination-wrapper" v-if="pager.total > pager.pageSize">
+            <basic-pagination
+              :pager="pager"
+              @on-pager-change="onPagerChange"
+            />
+          </div>
         </div>
       </a-col>
 
@@ -79,6 +77,7 @@
             <svg-icon icon-name="hot" />
             <h2>推荐文章</h2>
           </div>
+          <!-- 推荐文章 -->
           <fetch-loading ref="fetchHot">
             <div class="list">
               <ul>
@@ -122,6 +121,7 @@ import { mapGetters } from 'vuex'
 import HomeArticles from '@/components/article'
 import HomeTags from '@/components/tag'
 import FetchLoading from '@/components/loading'
+import BasicPagination from '@/components/pagination'
 import { articleList } from '@/services/api'
 import userConfig from '@/config'
 
@@ -130,19 +130,21 @@ export default {
   components: {
     HomeArticles,
     HomeTags,
-    FetchLoading
+    FetchLoading,
+    BasicPagination
   },
   data() {
     return {
       userConfig,
-      /* article */
       postList: [],     // 文章列表
       hottest: [],      // 最热
       // latest: [],    // 最新
-      // 分页
-      pageNum: 1,
-      pageSize: 15,
-      total: 0,
+      // 分页器
+      pager: {
+        pageNum: 1,
+        pageSize: 15,
+        total: 0
+      },
       // 无数据
       isEmpty: false,
       params: {
@@ -173,7 +175,7 @@ export default {
       this.$refs[ref].fetchData({
         api: articleList,
         params: {
-          pageNum: this.pageNum,
+          pageNum: this.pager.pageNum,
           pageSize: size,
           ...this.params
         },
@@ -186,9 +188,9 @@ export default {
     getList() {
       this.fetch(({ data, total }) => {
         this.postList = data
-        this.total = total
-        this.isEmpty = !this.total && true
-      }, this.pageSize)
+        this.$set(this.pager, 'total', total)
+        this.isEmpty = this.pager.total === 0 && true
+      }, this.pager.pageSize)
     },
 
     /* 最新，最热排序 */
@@ -214,13 +216,13 @@ export default {
     /* 标签选择 */
     getSelectedTag(tag) {
       this.$set(this.params, 'tags', tag._id)
-      this.pageNum = 1
+      this.$set(this.pager, 'pageNum', 1)
       this.getList()
     },
 
     /* 分页 */
-    onPagerChange(cur, size) {
-      this.pageNum = cur
+    onPagerChange(cur) {
+      this.$set(this.pager, 'pageNum', cur)
       this.getList()
     }
   },
@@ -250,7 +252,7 @@ export default {
           font-weight: bold;
         }
       }
-      .pagiation-wrapper {
+      .pagination-wrapper {
         @include flex($justify: flex-end);
         margin-top: 30px;
       }

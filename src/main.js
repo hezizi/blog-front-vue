@@ -29,7 +29,7 @@ import {
   Button,
   Icon,
   Spin,
-  Form,
+  Input,
   Skeleton,
   Timeline,
   Row,
@@ -54,7 +54,7 @@ Vue.use(Avatar)
 Vue.use(Button)
 Vue.use(Icon)
 Vue.use(Spin)
-Vue.use(Form)
+Vue.use(Input)
 Vue.use(Skeleton)
 Vue.use(Timeline)
 Vue.use(Row)

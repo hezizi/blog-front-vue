@@ -9,23 +9,21 @@
       />
       <a-avatar slot="avatar" icon="user" v-else />
       <div slot="content">
-        <a-form-item>
+        <div class="textarea">
           <a-textarea
             placeholder="说点啥... （支持 markdown 语法）"
             :rows="5"
             :value="value"
             @change="e => value = e.target.value"
           />
-        </a-form-item>
-        <a-form-item>
-          <a-button
-            html-type="submit"
-            type="primary"
-            :loading="submitting"
-            @click="handleSubmit"
-          > 我要留言
-          </a-button>
-        </a-form-item>
+        </div>
+        <a-button
+          html-type="submit"
+          type="primary"
+          :loading="submitting"
+          @click="handleSubmit"
+        > 我要留言
+        </a-button>
       </div>
     </a-comment>
 
@@ -79,3 +77,8 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+  .textarea {
+    margin-bottom: 20px;
+  }
+</style>

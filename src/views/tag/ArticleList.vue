@@ -1,6 +1,7 @@
 <template>
   <div class="article-tag-page">
     <fetch-loading ref="fetch">
+      <!-- breadcrumb -->
       <div class="breadcrumb">
         <!-- <a-breadcrumb :routes="routes">
           <template
@@ -15,9 +16,9 @@
             >{{route.breadcrumbName}}</router-link>
           </template>
         </a-breadcrumb>-->
-      </div>
 
-      <basic-breadcrumb />
+        <basic-breadcrumb />
+      </div>
 
       <div
         :key="item._id"
@@ -63,12 +64,21 @@
         </div>
       </div>
     </fetch-loading>
+
+    <!-- pagination -->
+    <div class="pagination-wrapper" v-if="pager.total > pager.pageSize">
+      <basic-pagination
+        :pager="pager"
+        @on-pager-change="onPagerChange"
+      />
+    </div>
   </div>
 </template>
 
 <script>
 import FetchLoading from '@/components/loading'
 import BasicBreadcrumb from '@/components/breadcrumb'
+import BasicPagination from '@/components/pagination'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
 import userConfig from '@/config'
@@ -78,15 +88,20 @@ export default {
   name: 'ArticleList',
   components: {
     FetchLoading,
-    BasicBreadcrumb
+    BasicBreadcrumb,
+    BasicPagination
   },
   props: ['name'],
   data () {
     return {
-      pageNum: 1,
-      pageSize: 20,
-      articlesList: [],
       userConfig,
+      articlesList: [],
+      // 分页器
+      pager: {
+        pageNum: 1,
+        pageSize: 6,
+        total: 0
+      },
       // routes
     }
   },
@@ -103,16 +118,19 @@ export default {
   methods: {
     async getAllArticle () {
       const tagId = this.$route.query.tag_id
+      const { pageNum, pageSize, total } = this.pager
+
       this.$refs['fetch'].fetchData({
         api: articleList,
         params: {
-          pageNum: this.pageNum,
-          pageSize: this.pageSize,
+          pageNum,
+          pageSize,
           tags: tagId
         },
         withLoading: true,
-        handleFn: result => {
-          this.articlesList = result.data
+        handleFn: ({ data, total }) => {
+          this.articlesList = data
+          this.$set(this.pager, 'total', total)
 
           const dateObj = {}
           this.articlesList.map(item => {
@@ -124,6 +142,11 @@ export default {
         }
       })
     },
+
+    onPagerChange(cur) {
+      this.$set(this.pager, 'pageNum', cur)
+      this.getAllArticle()
+    }
   },
 }
 </script>
@@ -154,6 +177,9 @@ export default {
         background-color: rgba($themeColor, 0.15);
       }
     }
+  }
+  .pagination-wrapper {
+    margin-top: 30px;
   }
 }
 </style>
