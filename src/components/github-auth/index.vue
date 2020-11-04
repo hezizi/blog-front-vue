@@ -32,10 +32,18 @@ export default {
       const { code } = this.$route.query
       this.loginAction({ code })
         .then(response => {
-          this.$message.success(`欢迎 ${response.name}`, 1.5)
+          this.$message.success({
+            content: `欢迎 ${response.name}`,
+            duration: 1.5,
+            icon: h => <svg-icon icon-name="success" />
+          })
         })
         .catch(err => {
-          this.$message.error(err, 1.5)
+          this.$message.error({
+            content: err,
+            duration: 1.5,
+            icon: h => <svg-icon icon-name="error" />
+          })
         })
         .finally(() => {
           // this.$router.push({ path: this.prevRoute.path })

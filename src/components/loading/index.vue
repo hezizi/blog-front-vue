@@ -27,7 +27,12 @@ export default {
         return
       }
       const { status, message, result } = res
-      status ? handleFn(result) : this.$message.error(message, 1.5)
+      status ? handleFn(result) :
+        this.$message.error({
+          content: message,
+          duration: 1.5,
+          icon: h => <svg-icon icon-name="error" />
+        })
     }
   }
 }

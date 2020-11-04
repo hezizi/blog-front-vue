@@ -55,7 +55,11 @@ export default {
     // 我要留言了
     handleSubmit() {
       if (!this.token && !this.userInfo) {
-        this.$message.warn('未登录，请先登录 !', 2)
+        this.$message.warn({
+          content: '未登录，请先登录 !',
+          duration: 2,
+          icon: h => <svg-icon icon-name="warning" />
+        })
         this.value = ''
         return
       }
@@ -65,7 +69,11 @@ export default {
       this.submitting = true
       comment({ userId: this.userInfo.user_id, content: this.value })
         .then(res => {
-          this.$message.success(res.message, 1.5)
+          this.$message.success({
+            content: res.message,
+            duration: 1.5,
+            icon: h => <svg-icon icon-name="success" />
+          })
 
           this.$refs['commlist'].commListApi(true)
         })

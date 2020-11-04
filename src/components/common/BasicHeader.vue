@@ -114,7 +114,11 @@ export default {
     // 退出登录
     logout() {
       this.logoutAction().then(res => {
-        this.$message.success(res, 1.5)
+        this.$message.success({
+          content: res,
+          duration: 1.5,
+          icon: h => <svg-icon icon-name="success" />
+        })
         // window.location.href = '/'
 
         setTimeout(() => {
