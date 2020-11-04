@@ -2,23 +2,9 @@
   <div class="article-tag-page">
     <fetch-loading ref="fetch">
       <!-- breadcrumb -->
-      <div class="breadcrumb">
-        <!-- <a-breadcrumb :routes="routes">
-          <template
-            slot="itemRender"
-            slot-scope="{route, params, routes, paths}"
-          >
-
-            <span v-if="routes.indexOf(route) === routes.length - 1">{{route.breadcrumbName}}</span>
-            <router-link
-              :to="paths.join('/')"
-              v-else
-            >{{route.breadcrumbName}}</router-link>
-          </template>
-        </a-breadcrumb>-->
-
-        <basic-breadcrumb />
-      </div>
+      <basic-breadcrumb
+        :list="articlesList"
+      />
 
       <div
         :key="item._id"
@@ -82,7 +68,6 @@ import BasicPagination from '@/components/pagination'
 import { articleList } from '@/services/api'
 import { dateFormat } from '@/utils'
 import userConfig from '@/config'
-// import routes from '@/router/routes'
 
 export default {
   name: 'ArticleList',
@@ -101,8 +86,7 @@ export default {
         pageNum: 1,
         pageSize: 6,
         total: 0
-      },
-      // routes
+      }
     }
   },
   computed: {
@@ -147,7 +131,7 @@ export default {
       this.$set(this.pager, 'pageNum', cur)
       this.getAllArticle()
     }
-  },
+  }
 }
 </script>
 

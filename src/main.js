@@ -40,6 +40,8 @@ import {
   Badge,
   Divider,
   Empty,
+  Modal,
+  Menu,
   message
 } from 'ant-design-vue'
 
@@ -65,7 +67,10 @@ Vue.use(Affix)
 Vue.use(Badge)
 Vue.use(Divider)
 Vue.use(Empty)
+Vue.use(Modal)
+Vue.use(Menu)
 Vue.prototype.$message = message
+Vue.prototype.$confirm = Modal.confirm
 
 Vue.use(VueLazyload, {
   // error: 'dist/error.png',

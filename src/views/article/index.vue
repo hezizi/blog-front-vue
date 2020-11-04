@@ -3,36 +3,34 @@
     <div class="article-detail">
       <a-row :gutter="40">
         <a-col :md="18">
-          <div class="">
-            <!-- header -->
-            <header>
-              <div class="title">
-                <h1>{{ articleInfo.title }}</h1>
+          <!-- header -->
+          <header>
+            <div class="title">
+              <h1>{{ articleInfo.title }}</h1>
+            </div>
+            <div class="meta df-aic">
+              <div class="avatar">
+                <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
               </div>
-              <div class="meta df-aic">
-                <div class="avatar">
-                  <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
+              <div class="author-info flex1">
+                <div class="author-name">
+                  <h3>{{ articleInfo.author }}</h3>
                 </div>
-                <div class="author-info flex1">
-                  <div class="author-name">
-                    <h3>{{ articleInfo.author }}</h3>
-                  </div>
-                  <div class="meta-wrapper df-aic">
-                    <span><a-icon type="clock-circle"  /> {{ articleInfo.createDate }}</span>
-                    <span><a-icon type="eye" /> {{ articleInfo.views }}</span>
-                    <div class="df-aic">
-                      <a-icon type="tags" :style="{marginRight: '5px'}"/>
-                      <a-tag v-for="tag in articleInfo.tags" :key="tag._id" :color="tagColor">{{ tag.name }}</a-tag>
-                    </div>
+                <div class="meta-wrapper df-aic">
+                  <span><a-icon type="clock-circle"  /> {{ articleInfo.createDate }}</span>
+                  <span><a-icon type="eye" /> {{ articleInfo.views }}</span>
+                  <div class="df-aic">
+                    <a-icon type="tags" :style="{marginRight: '5px'}"/>
+                    <a-tag v-for="tag in articleInfo.tags" :key="tag._id" :color="tagColor">{{ tag.name }}</a-tag>
                   </div>
                 </div>
               </div>
-            </header>
-            <!-- 详情 -->
-            <article>
-              <div class="detail" v-html="detail"></div>
-            </article>
-          </div>
+            </div>
+          </header>
+          <!-- 详情 -->
+          <article>
+            <div class="detail" v-html="detail"></div>
+          </article>
         </a-col>
 
         <a-col :md="6">
