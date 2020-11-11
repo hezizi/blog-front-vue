@@ -7,14 +7,14 @@ const isProd = process.env.NODE_ENV === 'production'
 
 // cdn
 const cdn = {
-  css: ['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/styles/atom-one-dark.min.css'],
+  css: ['//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.3.1/styles/atom-one-dark.min.css'],
   js: [
-    'https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.3/vue-router.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/marked/0.7.0/marked.min.js',
-    'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js'
+    '//cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.3/vue-router.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/marked/0.7.0/marked.min.js',
+    '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js'
   ]
 }
 

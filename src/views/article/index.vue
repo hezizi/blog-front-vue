@@ -3,6 +3,11 @@
     <div class="article-detail">
       <a-row :gutter="40">
         <a-col :md="18">
+          <!-- breadcrumb -->
+          <basic-breadcrumb
+            :list="articlesList"
+          />
+
           <!-- header -->
           <header>
             <div class="title">
@@ -48,6 +53,7 @@
 import { themeColor } from '@/assets/styles/variables.scss'
 import ArticleAnchor from '@/components/anchor'
 import FetchLoading from '@/components/loading'
+import BasicBreadcrumb from '@/components/breadcrumb'
 import { markdownToHtml, dateFormat } from '@/utils'
 import { articleDetail } from '@/services/api'
 import userConfig from '@/config'
@@ -58,7 +64,8 @@ export default {
   props: ['articleId'],
   components: {
     ArticleAnchor,
-    FetchLoading
+    FetchLoading,
+    BasicBreadcrumb
   },
   data() {
     return {
