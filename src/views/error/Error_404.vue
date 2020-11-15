@@ -1,10 +1,9 @@
 <template>
   <div class="error-page">
     <div class="error-img">
-      <img src="@/assets/images/error_404.svg" alt="error_logo">
+      <img src="@/assets/images/error_404.jpg" alt="error_logo" />
     </div>
     <div class="error-desc">
-      <h1>404</h1>
       <p>抱歉，访问的页面不存在</p>
       <a-button 
         type="primary" 
@@ -18,18 +17,21 @@
 
 <script>
 export default {
-  name: 'Error404',
+  name: 'NotFound'
 }
 </script>
 
 <style lang="scss" scoped>
   .error-page {
-    @include flex($justify: center, $align: center);
+    @include flex($justify: center, $align: center, $direction: column);
     padding-top: 200px;
     .error-img {
-      margin-right: 50px;
+      img {
+        width: 800px;
+      }
     }
     .error-desc {
+      margin-top: -60px;
       h1 {
         margin-bottom: 24px;
         color: #434e59;
