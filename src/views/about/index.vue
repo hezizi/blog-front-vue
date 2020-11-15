@@ -28,7 +28,7 @@
         </div>
 
         <div>
-          <h4 class="sub-title">😉😆也可以在这些地方找到我：</h4>
+          <h4 class="sub-title">😉😉😉 也可以在这些地方找到我：</h4>
           <ul>
             <li v-for="link in userConfig.OTHER_LINKS" :key="link.label">
               <svg-icon :icon-name="link.icon" />
