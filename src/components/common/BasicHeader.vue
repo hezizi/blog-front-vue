@@ -141,7 +141,7 @@ export default {
       @media screen and (max-width: 576px) {
         @include flex($justify: space-around, $direction: column);
         height: 120px;
-        padding: 10px 0;
+        padding-top: 10px;
       }
       @include flex($justify: space-between, $align: center);
       @include layout;

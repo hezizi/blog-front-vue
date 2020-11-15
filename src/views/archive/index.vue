@@ -81,6 +81,7 @@ export default {
 <style lang="scss" scoped>
   .achieve-page {
     margin-top: 30px;
+    padding: 0 60px;
     .header-year {
       position: relative;
       top: -8px;

@@ -43,6 +43,9 @@ export default {
 .tag-page {
   margin-top: 30px;
   padding: 0 60px;
+  @media screen and (max-width: 576px) {
+    padding: 0;
+  }
   ul {
     @include flex($justify: center);
     flex-wrap: wrap;
