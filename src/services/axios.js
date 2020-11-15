@@ -16,8 +16,12 @@ instance.interceptors.response.use(res => {
   return res
 }, err => {
   if (err.response) {
-    const { status, data: { message: msg } } = err.response
-    message.error(`${status} ${msg}`, 2)
+    const { status, data: { message: msg }, statusText } = err.response
+    message.error({
+      content: `Code: ${status} ${msg || statusText}`,
+      duration: 2,
+      icon: h => <svg-icon icon-name="error" />
+    })
     if (status === 401) return err.response
   }
   return Promise.reject(err)
