@@ -1,6 +1,7 @@
 import marked from 'marked'
 import hljs from 'highlight'
 import dayjs from 'dayjs'
+import { message } from 'ant-design-vue'
 
 /* markdown转html */
 export const markdownToHtml = markdown => marked(markdown, {
@@ -35,4 +36,18 @@ export const setSizeByCount = count => {
     default:
       return 32
   }
+}
+
+
+/* message */
+export const showMessage = (type, msg) => {
+  message[type]({
+    content: msg,
+    icon: h => <svg-icon icon-name={type} />
+    // icon: h => h('svg-icon', {
+    //   'attrs': {
+    //     'icon-name': type
+    //   }
+    // })
+  })
 }

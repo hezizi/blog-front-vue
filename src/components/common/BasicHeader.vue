@@ -47,6 +47,7 @@
 <script>
 import { mapActions } from 'vuex'
 import githubConfig from '@/config'
+import { showMessage } from '@/utils'
 
 export default {
   name: 'Header',
@@ -103,7 +104,7 @@ export default {
         title: 'Github授权登录',
         okText: '确认',
         cancelText: '取消',
-        icon: h => <svg-icon icon-name="warning" />,
+        icon: h => <svg-icon icon-name="warn" />,
         onOk: () => {
           const { auth_url, client_id } = this.githubConfig.GITHUB
           window.location.href = `${auth_url}?client_id=${client_id}&scope=read:user`
@@ -115,13 +116,7 @@ export default {
     // 退出登录
     logout() {
       this.logoutAction().then(res => {
-        this.$message.success({
-          content: res,
-          duration: 1.5,
-          icon: h => <svg-icon icon-name="success" />
-        })
-        // window.location.href = '/'
-
+        showMessage('success', res)
         setTimeout(() => {
           window.location.reload()
         }, 500)

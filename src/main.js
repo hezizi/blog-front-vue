@@ -68,8 +68,12 @@ Vue.use(Divider)
 Vue.use(Empty)
 Vue.use(Modal)
 Vue.use(Menu)
-Vue.prototype.$message = message
 Vue.prototype.$confirm = Modal.confirm
+Vue.prototype.$message = message
+message.config({
+  duration: 1.5,
+  maxCount: 3,  // 最多显示3个
+})
 
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { message } from 'ant-design-vue'
+import { showMessage } from '@/utils'
 
 const instance = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -17,12 +17,9 @@ instance.interceptors.response.use(res => {
 }, err => {
   if (err.response) {
     const { status, data: { message: msg }, statusText } = err.response
-    message.error({
-      content: `Code: ${status} ${msg || statusText}`,
-      duration: 2,
-      icon: h => <svg-icon icon-name="error" />
-    })
+   
     if (status === 401) return err.response
+    else showMessage('error', `Code: ${status} ${msg || statusText}`)
   }
   return Promise.reject(err)
 })

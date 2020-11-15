@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import { showMessage } from '@/utils'
+
 export default {
   name: 'Loading',
   data() {
@@ -22,17 +24,10 @@ export default {
       const res = await api(params)
       this.loading = false
 
-      if (!res) {
-        // this.$message.error('出错啦！！！', 1.5)
-        return
-      }
+      if (!res) return
+      
       const { status, message, result } = res
-      status ? handleFn(result) :
-        this.$message.error({
-          content: message,
-          duration: 1.5,
-          icon: h => <svg-icon icon-name="error" />
-        })
+      status ? handleFn(result) : showMessage('error', message)
     }
   }
 }
