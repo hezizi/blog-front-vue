@@ -3,6 +3,7 @@ module.exports = {
     '@vue/app'
   ],
   plugins: [
+    ["transform-remove-console"],
     [
       "import",
       {

@@ -1,8 +1,8 @@
 const { join } = require('path')
-const resolve = dir => join(__dirname, dir)
-const CompressionPlugin = require("compression-webpack-plugin")
+// const CompressionPlugin = require("compression-webpack-plugin")
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 
+const resolve = dir => join(__dirname, dir)
 const isProd = process.env.NODE_ENV === 'production'
 
 // cdn
@@ -38,19 +38,26 @@ module.exports = {
       highlight: 'hljs',
       marked: 'marked'
     })
-    config.plugin('html').tap(args => {
-      // html中添加cdn
-      args[0].cdn = cdn
-      return args
-    })
+
+    config
+      .plugin('html')
+      .tap(args => {
+        // html中添加cdn
+        args[0].cdn = cdn
+        return args
+      })
 
     /**
      * webpack loader that lets you use SVG files as Vue components
      * https://www.npmjs.com/package/vue-svg-loader
      */
     const svgRule = config.module.rule('svg')
+    // 清除已有的所有 loader
     svgRule.uses.clear()
-    svgRule.use('vue-svg-loader').loader('vue-svg-loader')
+    // 添加要替换的 loader
+    svgRule
+      .use('vue-svg-loader')
+        .loader('vue-svg-loader')
 
     if (isProd) {
       /**
@@ -79,7 +86,10 @@ module.exports = {
         /**
          * 注意：在 sass-loader v8 中，这个选项名是 "prependData"
          */
-        data: `@import "~@/assets/styles/variables.scss";`
+        data: `
+          @import "~@/assets/styles/variables.scss";
+          @import "~@/assets/styles/mixin.scss";
+        `
       }
     }
   },
