@@ -33,7 +33,7 @@ export default {
         }
       }
       article.replace(pattern, ($0, $1) => {
-        // console.log('*********************************$0', $0)
+        console.log('*********************************$0', $0)
         const title = $0.replace(/.*?>/, '')
         const startIndex = $0.indexOf('"')
         const endIndex = $0.indexOf('">')
