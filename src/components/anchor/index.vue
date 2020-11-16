@@ -1,19 +1,12 @@
 <template>
   <a-anchor :offsetTop="100">
     <a-anchor-link
-      v-for="anchor in anchorList" 
+      v-for="anchor in anchorList"
       :key="anchor.href"
-      :href="anchor.href" 
+      :href="anchor.href"
       :title="anchor.title"
     >
-      
     </a-anchor-link>
-    <!-- <a-anchor-link href="#前面的话" title="前面的话" />
-    <a-anchor-link href="#同步和异步" title="同步和异步" />
-    <a-anchor-link href="#开胃菜" title="开胃菜">
-      <a-anchor-link href="#Anchor-Props" title="Anchor Props" />
-      <a-anchor-link href="#Link-Props" title="Link Props" />
-    </a-anchor-link> -->
   </a-anchor>
 </template>
 
@@ -28,7 +21,6 @@ export default {
   methods: {
     /* 根据文章生成锚点目录 */
     getAnchorList(article) {
-      console.log('article', article)
       const pattern = /<(h[1-6])[\s\S]+?(?=<\/\1>)/g
       const list = []
       function pushItem(arr, item) {
@@ -38,19 +30,14 @@ export default {
           pushItem(matchItem.children, item)
         } else {
           arr.push(item)
-          // debugger
         }
       }
       article.replace(pattern, ($0, $1) => {
         // console.log('*********************************$0', $0)
         const title = $0.replace(/.*?>/, '')
-
-        // console.log('title', title)
         const startIndex = $0.indexOf('"')
         const endIndex = $0.indexOf('">')
-
         const href = `#${$0.slice(startIndex + 1, endIndex)}`
-        // console.log('href', href)
         const currentItem = {
           tag: $1, // 标签类型
           title,
@@ -59,10 +46,6 @@ export default {
         }
         pushItem(list, currentItem)
       })
-
-      // console.log('************************************************list', list)
-
-      // return list
       this.anchorList = list
     }
   }

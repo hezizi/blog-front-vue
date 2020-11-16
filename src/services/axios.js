@@ -6,18 +6,20 @@ const instance = axios.create({
   timeout: 6000
 })
 
+// request interceptors
 instance.interceptors.request.use(config => {
   return config
 }, err => {
   return Promise.reject(err)
 })
 
+// response interceptors
 instance.interceptors.response.use(res => {
   return res
 }, err => {
   if (err.response) {
     const { status, data: { message: msg }, statusText } = err.response
-   
+
     if (status === 401) return err.response
     else showMessage('error', `Code: ${status} ${msg || statusText}`)
   }
