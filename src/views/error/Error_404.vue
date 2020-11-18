@@ -5,8 +5,8 @@
     </div>
     <div class="error-desc">
       <p>抱歉，访问的页面不存在</p>
-      <a-button 
-        type="primary" 
+      <a-button
+        type="primary"
         @click="$router.go(-1)"
         style="marginRight: 10px"
         >返回上一页</a-button>
@@ -24,7 +24,6 @@ export default {
 <style lang="scss" scoped>
   .error-page {
     @include flex($justify: center, $align: center, $direction: column);
-    padding-top: 200px;
     .error-img {
       img {
         width: 800px;

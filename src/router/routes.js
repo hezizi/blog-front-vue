@@ -9,7 +9,6 @@ export default [{
       name: 'home',
       component: () => import('@/views/home'),
       meta: {
-        // breadcrumb: 'Home'
         keepAlive: false
       }
     }, {
@@ -19,17 +18,13 @@ export default [{
       component: () => import('@/views/article'),
       props: true,
       meta: {
-        // breadcrumb: '文章',
         keepAlive: false
       }
     }, {
       // 标签
       path: '/tag',
       name: 'tag',
-      component: () => import('@/views/tag'),
-      meta: {
-        // breadcrumb: '标签'
-      }
+      component: () => import('@/views/tag')
     }, {
       // 标签
       path: '/tag/:name',
@@ -44,18 +39,12 @@ export default [{
       // 归档
       path: '/archive',
       name: 'archive',
-      component: () => import('@/views/archive'),
-      meta: {
-        // breadcrumb: '归档'
-      }
+      component: () => import('@/views/archive')
     }, {
       // 关于
       path: '/about',
       name: 'about',
-      component: () => import('@/views/about'),
-      meta: {
-        breadcrumb: '关于'
-      }
+      component: () => import('@/views/about')
     }, {
       path: '/auth',
       name: 'auth',

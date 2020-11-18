@@ -1,11 +1,13 @@
 <template>
   <div class="article-tag-page">
-    <fetch-loading ref="fetch">
-      <!-- breadcrumb -->
-      <basic-breadcrumb
-        :list="articlesList"
-      />
+    <!-- breadcrumb -->
+    <basic-breadcrumb
+      :current="name"
+      :list="list"
+    />
 
+    <!-- article list -->
+    <fetch-loading ref="fetch">
       <div
         :key="item._id"
         class="item df"
@@ -115,14 +117,6 @@ export default {
         handleFn: ({ data, total }) => {
           this.articlesList = data
           this.$set(this.pager, 'total', total)
-
-          const dateObj = {}
-          this.articlesList.map(item => {
-            const year = item.create_time.slice(0, 4)
-            dateObj[year] = dateObj[year] || []
-            dateObj[year].push(item)
-          })
-          this.newList = Object.keys(dateObj).map(group => dateObj[group])
         }
       })
     },

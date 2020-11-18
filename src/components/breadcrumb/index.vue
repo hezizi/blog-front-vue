@@ -9,9 +9,7 @@
         <a href="javascript: void(0)">General</a>
         <a-menu slot="overlay">
           <a-menu-item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-              General
-            </a>
+
           </a-menu-item>
         </a-menu>
       </a-breadcrumb-item>
@@ -20,13 +18,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Breadcrumb',
   data () {
     return {
 
     }
-  }
+  },
+  computed: {
+    ...mapGetters(['allTags'])
+  },
 }
 </script>
 
