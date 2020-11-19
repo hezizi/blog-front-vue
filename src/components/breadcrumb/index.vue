@@ -34,7 +34,6 @@ export default {
     ...mapGetters(['allTags']),
     ...mapGetters(['allPosts']),
     breadcrumb() {
-      console.log(this.allPosts)
       return this.$route.meta.breadcrumb
     },
     menuList() {

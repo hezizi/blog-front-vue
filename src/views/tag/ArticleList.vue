@@ -6,7 +6,7 @@
     <!-- article list -->
     <fetch-loading ref="fetch">
       <!-- 暂无数据 -->
-      <div v-if="isEmpty">
+      <div class="empty" v-if="isEmpty">
         <a-empty description="暂无数据"/>
       </div>
 
@@ -152,8 +152,11 @@ export default {
     padding: 0;
   }
   padding: 0 60px;
+  .empty {
+    margin-top: 100px;
+  }
   .item {
-    padding: 15px 0;
+    padding: 15px 0 10px;
     margin-bottom: 15px;
     border-bottom: 1px dashed #eee;
     .avatar {
