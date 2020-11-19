@@ -1,16 +1,19 @@
 <template>
   <div class="article-tag-page">
     <!-- breadcrumb -->
-    <basic-breadcrumb
-      :current="name"
-      :list="list"
-    />
+    <basic-breadcrumb :current="current" />
 
     <!-- article list -->
     <fetch-loading ref="fetch">
+      <!-- 暂无数据 -->
+      <div v-if="isEmpty">
+        <a-empty description="暂无数据"/>
+      </div>
+
       <div
-        :key="item._id"
+        v-else
         class="item df"
+        :key="item._id"
         v-for="item in articlesList"
       >
         <div class="avatar">
@@ -83,6 +86,7 @@ export default {
     return {
       userConfig,
       articlesList: [],
+      isEmpty: false,
       // 分页器
       pager: {
         pageNum: 1,
@@ -96,6 +100,18 @@ export default {
       return (item, v) => {
         return v ? dateFormat(item.create_time) : this.dayjs(item.create_time).fromNow()
       }
+    },
+    // 当前页信息
+    current() {
+      return {
+        id: this.$route.query.tag_id,
+        name: this.name
+      }
+    }
+  },
+  watch: {
+    $route() {
+      this.onPagerChange(1)
     }
   },
   mounted () {
@@ -117,6 +133,7 @@ export default {
         handleFn: ({ data, total }) => {
           this.articlesList = data
           this.$set(this.pager, 'total', total)
+          this.isEmpty = this.pager.total === 0 && true
         }
       })
     },

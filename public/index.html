@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
-      <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" crossorigin="anonymous" />
+    <% for (var css of htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
+      <link rel="stylesheet" href="<%= css %>" crossorigin="anonymous" />
     <% } %>
     <title>赫子子的博客</title>
     <meta
@@ -19,10 +19,10 @@
       <strong>We're sorry but blog-front doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
 
-    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+    <% for (var js of htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
       <script
         type="text/javascript"
-        src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"
+        src="<%= js %>"
         crossorigin="anonymous"
       ></script>
     <% } %>

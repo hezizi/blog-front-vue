@@ -1,52 +1,53 @@
 <template>
-  <fetch-loading ref="fetch">
-    <div class="article-detail">
-      <a-row :gutter="40">
-        <a-col :md="18">
-          <!-- breadcrumb -->
-          <basic-breadcrumb
-            :list="articlesList"
-          />
+  <div>
+    <!-- breadcrumb -->
+    <basic-breadcrumb :current="current" />
 
-          <!-- header -->
-          <header>
-            <div class="title">
-              <h1>{{ articleInfo.title }}</h1>
-            </div>
-            <div class="meta df-aic">
-              <div class="avatar">
-                <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
+    <!-- 文章详情 -->
+    <fetch-loading ref="fetch">
+      <div class="article-detail">
+        <a-row :gutter="40">
+          <a-col :md="18">
+            <!-- header -->
+            <header>
+              <div class="title">
+                <h1>{{ articleInfo.title }}</h1>
               </div>
-              <div class="author-info flex1">
-                <div class="author-name">
-                  <h3>{{ articleInfo.author }}</h3>
+              <div class="meta df-aic">
+                <div class="avatar">
+                  <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
                 </div>
-                <div class="meta-wrapper df-aic">
-                  <span><a-icon type="clock-circle"  /> {{ articleInfo.createDate }}</span>
-                  <span><a-icon type="eye" /> {{ articleInfo.views }}</span>
-                  <div class="df-aic">
-                    <a-icon type="tags" :style="{marginRight: '5px'}"/>
-                    <a-tag v-for="tag in articleInfo.tags" :key="tag._id" :color="tagColor">{{ tag.name }}</a-tag>
+                <div class="author-info flex1">
+                  <div class="author-name">
+                    <h3>{{ articleInfo.author }}</h3>
+                  </div>
+                  <div class="meta-wrapper df-aic">
+                    <span><a-icon type="clock-circle"  /> {{ articleInfo.createDate }}</span>
+                    <span><a-icon type="eye" /> {{ articleInfo.views }}</span>
+                    <div class="df-aic">
+                      <a-icon type="tags" :style="{marginRight: '5px'}"/>
+                      <a-tag v-for="tag in articleInfo.tags" :key="tag._id" :color="tagColor">{{ tag.name }}</a-tag>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </header>
-          <!-- 详情 -->
-          <article>
-            <div class="detail" v-html="detail"></div>
-          </article>
-        </a-col>
+            </header>
+            <!-- 详情 -->
+            <article>
+              <div class="detail" v-html="detail"></div>
+            </article>
+          </a-col>
 
-        <a-col :md="6">
-          <!-- 锚点目录 -->
-          <div class="anchor">
-            <article-anchor ref="anchor" />
-          </div>
-        </a-col>
-      </a-row>
-    </div>
-  </fetch-loading>
+          <a-col :md="6">
+            <!-- 锚点目录 -->
+            <div class="anchor">
+              <article-anchor ref="anchor" />
+            </div>
+          </a-col>
+        </a-row>
+      </div>
+    </fetch-loading>
+  </div>
 </template>
 
 <script>
@@ -85,6 +86,13 @@ export default {
   computed: {
     detail() {
       return markdownToHtml(this.articleInfo.content)
+    },
+    // 当前页信息
+    current() {
+      return {
+        id: this.articleId,
+        name: this.articleInfo.title
+      }
     }
   },
   mounted() {
@@ -101,8 +109,10 @@ export default {
           new Promise(resolve => {
             // 请求成功后的操作
             const { data, data: { create_time, content } } = result
-            for (const info in this.articleInfo) {
-              this.$set(this.articleInfo, info, data[info])
+            for (const key in this.articleInfo) {
+              if (this.articleInfo.hasOwnProperty(key)) {
+                this.$set(this.articleInfo, key, data[key])
+              }
             }
             this.$set(this.articleInfo, 'createDate', dateFormat(create_time))
             resolve(content)

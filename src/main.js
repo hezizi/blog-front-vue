@@ -6,6 +6,7 @@ import store from './store'
 import SvgIcon from '@/components/icon'
 import { getStorage } from '@/utils/storage'
 
+// dayjs
 import dayjs from 'dayjs'
 const relativeTime = require('dayjs/plugin/relativeTime')
 dayjs.locale('zh-cn')
@@ -93,6 +94,7 @@ new Vue({
     store.commit('SET_TOKEN', getStorage('GITHUB_ACCESS_TOKEN'))
     store.commit('SET_USERINFO', getStorage('GITHUB_INFO'))
     store.dispatch('setAllTags')
+    store.dispatch('setAllPosts')
   },
   render: h => h(App)
 }).$mount('#app')

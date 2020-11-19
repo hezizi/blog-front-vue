@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { themeColor } from '@/assets/styles/variables.scss'
 import FetchLoading from '@/components/loading'
 import { articleList } from '@/services/api'
+import { themeColor } from '@/assets/styles/variables.scss'
 
 export default {
   name: 'Archive',
@@ -42,10 +42,10 @@ export default {
     return {
       pageNum: 1,
       pageSize: 20,
-      
+
       articlesList: [],
       newList: [],
-      
+
       color: themeColor,
     }
   },

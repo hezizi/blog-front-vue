@@ -18,6 +18,11 @@ export default [{
       component: () => import('@/views/article'),
       props: true,
       meta: {
+        breadcrumb: {
+          id: 'article',
+          title: '文章',
+          link: '/archive'
+        },
         keepAlive: false
       }
     }, {
@@ -33,6 +38,11 @@ export default [{
       component: () => import('@/views/tag/ArticleList'),
       props: true,
       meta: {
+        breadcrumb: {
+          id: 'tag',
+          title: '标签',
+          link: '/tag'
+        },
         keepAlive: false
       }
     }, {
