@@ -8,12 +8,14 @@
         <router-link :to="breadcrumb.link">{{ breadcrumb.title }}</router-link>
       </a-breadcrumb-item>
       <a-breadcrumb-item>
-        <a href="javascript: void(0)">{{ current.name || current.title }}</a>
-        <a-menu slot="overlay">
-          <a-menu-item v-for="item in menuList" :key="item._id">
-            <router-link :to="{ path: `/tag/${encodeURI(item.name)}`, query: { tag_id: item._id } }">{{ item.name || item.title }}</router-link>
-          </a-menu-item>
-        </a-menu>
+        <a-dropdown>
+          <a href="javascript: void(0)">{{ current.name }}</a>
+          <a-menu slot="overlay">
+            <a-menu-item v-for="item in menuList" :key="item._id">
+              <router-link :to="routerInfo(item)">{{ breadcrumb.id === 'tag' ? item.name : item.title }}</router-link>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
       </a-breadcrumb-item>
     </a-breadcrumb>
   </div>
@@ -30,17 +32,30 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      breadcrumb: {}
+    }
+  },
   computed: {
     ...mapGetters(['allTags']),
     ...mapGetters(['allPosts']),
-    breadcrumb() {
-      return this.$route.meta.breadcrumb
-    },
     menuList() {
-      const { id } = this.$route.meta.breadcrumb
-      if (id === 'tag') return this.allTags.filter(tag => this.current.id !== tag._id)
-      else return this.allPosts.filter(post => this.current.id !== post._id)
+      const { id } = this.breadcrumb
+      const which = id === 'tag' ? 'allTags' : 'allPosts'
+      return this[which].filter(item => this.current.id !== item._id)
+    },
+    routerInfo() {
+      const { id } = this.breadcrumb
+      return item => {
+        return id === 'tag'
+          ? { name: 'tag', params: { tagId: item._id } }
+          : { name: 'article', params: { articleId: item._id } }
+      }
     }
+  },
+  created() {
+    this.breadcrumb = this.$route.meta.breadcrumb
   }
 }
 </script>

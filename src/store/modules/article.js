@@ -13,11 +13,7 @@ export default {
 
   actions: {
     setAllPosts({ commit }) {
-      const params = {
-        pageNum: 1,
-        pageSize: 100,
-      }
-      articleList(params).then(res => {
+      articleList().then(res => {
         const posts = res.result.data
         commit('SET_ALL_POSTS', posts)
       })

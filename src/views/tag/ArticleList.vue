@@ -3,6 +3,11 @@
     <!-- breadcrumb -->
     <basic-breadcrumb :current="current" />
 
+    <!-- blockquote -->
+    <div class="blockquote">
+      <h4>{{ current.name }}</h4>
+    </div>
+
     <!-- article list -->
     <fetch-loading ref="fetch">
       <!-- 暂无数据 -->
@@ -81,7 +86,7 @@ export default {
     BasicBreadcrumb,
     BasicPagination
   },
-  props: ['name'],
+  props: ['tagId'],
   data () {
     return {
       userConfig,
@@ -103,9 +108,11 @@ export default {
     },
     // 当前页信息
     current() {
+      const tags = this.$store.getters.allTags
+      const { name } = tags.find(t => t._id === this.tagId)
       return {
-        id: this.$route.query.tag_id,
-        name: this.name
+        id: this.tagId,
+        name
       }
     }
   },
@@ -119,7 +126,6 @@ export default {
   },
   methods: {
     async getAllArticle () {
-      const tagId = this.$route.query.tag_id
       const { pageNum, pageSize, total } = this.pager
 
       this.$refs['fetch'].fetchData({
@@ -127,7 +133,7 @@ export default {
         params: {
           pageNum,
           pageSize,
-          tags: tagId
+          tags: this.tagId
         },
         withLoading: true,
         handleFn: ({ data, total }) => {
@@ -152,6 +158,13 @@ export default {
     padding: 0;
   }
   padding: 0 60px;
+  .blockquote {
+    padding: 10px 16px;
+    margin: 10px 0;
+    color: #666;
+    border-left: 4px solid rgba($themeColor, .1);
+    background-color: rgba($themeColor, .05);
+  }
   .empty {
     margin-top: 100px;
   }

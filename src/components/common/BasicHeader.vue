@@ -61,7 +61,7 @@ export default {
       }, {
         name: '标签',
         icon: 'tags',
-        to: '/tag'
+        to: '/tags'
       }, {
         name: '归档',
         icon: 'bars',

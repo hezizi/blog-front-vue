@@ -42,6 +42,7 @@ import {
   Empty,
   Modal,
   Menu,
+  Dropdown,
   message
 } from 'ant-design-vue'
 
@@ -69,6 +70,7 @@ Vue.use(Divider)
 Vue.use(Empty)
 Vue.use(Modal)
 Vue.use(Menu)
+Vue.use(Dropdown)
 Vue.prototype.$confirm = Modal.confirm
 Vue.prototype.$message = message
 message.config({
@@ -94,7 +96,7 @@ new Vue({
     store.commit('SET_TOKEN', getStorage('GITHUB_ACCESS_TOKEN'))
     store.commit('SET_USERINFO', getStorage('GITHUB_INFO'))
     store.dispatch('setAllTags')
-    store.dispatch('setAllPosts')
+    store.dispatch('setAllPosts') // 如果严重影响首屏加载可以去掉此功能
   },
   render: h => h(App)
 }).$mount('#app')

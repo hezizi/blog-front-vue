@@ -27,21 +27,20 @@ export default [{
       }
     }, {
       // 标签
-      path: '/tag',
-      name: 'tag',
+      path: '/tags',
+      name: 'tags',
       component: () => import('@/views/tag')
     }, {
       // 标签
-      path: '/tag/:name',
-      name: 'tagArticle',
-      breadcrumb: '',
+      path: '/tag/:tagId',
+      name: 'tag',
       component: () => import('@/views/tag/ArticleList'),
       props: true,
       meta: {
         breadcrumb: {
           id: 'tag',
           title: '标签',
-          link: '/tag'
+          link: '/tags'
         },
         keepAlive: false
       }

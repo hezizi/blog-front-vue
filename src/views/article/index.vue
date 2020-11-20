@@ -95,7 +95,13 @@ export default {
       }
     }
   },
+  watch: {
+    $route() {
+      this.getDetail()
+    }
+  },
   mounted() {
+    // this.$store.dispatch('setAllPosts')
     this.getDetail()
   },
   methods: {
