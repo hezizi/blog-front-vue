@@ -12,7 +12,9 @@
           <a href="javascript: void(0)">{{ current.name }}</a>
           <a-menu slot="overlay">
             <a-menu-item v-for="item in menuList" :key="item._id">
-              <router-link :to="routerInfo(item)">{{ breadcrumb.id === 'tag' ? item.name : item.title }}</router-link>
+              <router-link :to="routerInfo(item)">
+                {{ breadcrumb.link.includes('tags') ? item.name : item.title }}
+              </router-link>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
@@ -41,14 +43,14 @@ export default {
     ...mapGetters(['allTags']),
     ...mapGetters(['allPosts']),
     menuList() {
-      const { id } = this.breadcrumb
-      const which = id === 'tag' ? 'allTags' : 'allPosts'
+      const { link } = this.breadcrumb
+      const which = link.includes('tags') ? 'allTags' : 'allPosts'
       return this[which].filter(item => this.current.id !== item._id)
     },
     routerInfo() {
-      const { id } = this.breadcrumb
+      const { link } = this.breadcrumb
       return item => {
-        return id === 'tag'
+        return link.includes('tags')
           ? { name: 'tag', params: { tagId: item._id } }
           : { name: 'article', params: { articleId: item._id } }
       }

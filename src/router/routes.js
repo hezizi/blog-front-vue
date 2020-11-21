@@ -19,7 +19,6 @@ export default [{
       props: true,
       meta: {
         breadcrumb: {
-          id: 'article',
           title: '文章',
           link: '/archive'
         },
@@ -38,7 +37,6 @@ export default [{
       props: true,
       meta: {
         breadcrumb: {
-          id: 'tag',
           title: '标签',
           link: '/tags'
         },
