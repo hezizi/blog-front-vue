@@ -26,7 +26,7 @@
           <!-- 文章列表 -->
           <fetch-loading ref="fetch">
             <!-- 暂无数据 -->
-            <div v-if="isEmpty">
+            <div class="empty" v-if="isEmpty">
               <a-empty description="暂无数据"/>
             </div>
 
@@ -259,6 +259,9 @@ export default {
     }
     .article-title {
       @include flex($justify: space-between, $align: center);
+    }
+    .empty {
+      margin-top: 60px;
     }
     .list {
       ul {
