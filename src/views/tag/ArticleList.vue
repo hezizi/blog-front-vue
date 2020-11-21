@@ -106,13 +106,14 @@ export default {
         return v ? dateFormat(item.create_time) : this.dayjs(item.create_time).fromNow()
       }
     },
-    // 当前页信息
+    // 当前标签信息
     current() {
       const tags = this.$store.getters.allTags
-      const { name } = tags.find(t => t._id === this.tagId)
+      // 存在tagId不为当前标签中的任何一个的情况，所以此处不进行解构
+      const currentTag = tags.find(t => t._id === this.tagId)
       return {
         id: this.tagId,
-        name
+        name: currentTag && currentTag.name || ''
       }
     }
   },
@@ -159,14 +160,17 @@ export default {
   }
   padding: 0 60px;
   .blockquote {
-    padding: 10px 16px;
+    padding: 15px;
     margin: 10px 0;
     color: #666;
     border-left: 4px solid rgba($themeColor, .1);
     background-color: rgba($themeColor, .05);
+    h4 {
+      font-size: 16px;
+    }
   }
   .empty {
-    margin-top: 100px;
+    margin-top: 60px;
   }
   .item {
     padding: 15px 0 10px;

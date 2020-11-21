@@ -66,5 +66,5 @@ export default [{
 }, {
   // 404页面
   path: '*',
-  component: () => import('@/views/error/Error_404')
+  component: () => import('@/views/error/NotFound')
 }]

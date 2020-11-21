@@ -24,6 +24,7 @@ export default {
 <style lang="scss" scoped>
   .error-page {
     @include flex($justify: center, $align: center, $direction: column);
+    margin-top: 60px;
     .error-img {
       img {
         width: 800px;
