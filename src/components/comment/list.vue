@@ -23,7 +23,7 @@
         <load-more
           :is-show-load-more="isShowLoadMore"
           :loading-more="loadingMore"
-          @getPageNum="getPageNum"
+          @get-page-num="getPageNum"
         />
       </a-list>
     </div>

@@ -1,5 +1,6 @@
 <template>
   <div class="breadcrumb-wrapper">
+    <!-- 目前仅在文章详情页和标签文章列表页使用 -->
     <a-breadcrumb>
       <a-breadcrumb-item>
         <router-link to="/"><a-icon type="home" /></router-link>

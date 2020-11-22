@@ -43,9 +43,7 @@
 
         <a-col :md="6">
           <!-- 锚点目录 -->
-          <div class="anchor">
-            <article-anchor ref="anchor" />
-          </div>
+          <article-anchor ref="anchor" />
         </a-col>
       </a-row>
     </fetch-loading>
@@ -134,7 +132,7 @@ export default {
         }
       })
     }
-  },
+  }
 }
 </script>
 
@@ -149,7 +147,13 @@ export default {
       background-color: rgba($themeColor, .05);
     }
     .detail-wrapper {
+      @media screen and (max-width: 767px) {
+        @include flex($direction: column);
+      }
       .left {
+        @media screen and (max-width: 767px) {
+          flex: 1;
+        }
         @include flex($direction: column);
       }
       header {
@@ -179,14 +183,6 @@ export default {
         border-top: 1px dashed #eee;
         border-bottom: 1px dashed #eee;
         color: #333;
-      }
-      .anchor {
-        // width: 20%;
-        // margin-left: 40px;
-        /deep/ .ant-anchor-ink::before {
-          width: 1px;
-          background-color: #eee;
-        }
       }
     }
   }

@@ -43,6 +43,7 @@ import {
   Modal,
   Menu,
   Dropdown,
+  Drawer,
   message
 } from 'ant-design-vue'
 
@@ -71,6 +72,7 @@ Vue.use(Empty)
 Vue.use(Modal)
 Vue.use(Menu)
 Vue.use(Dropdown)
+Vue.use(Drawer)
 Vue.prototype.$confirm = Modal.confirm
 Vue.prototype.$message = message
 message.config({

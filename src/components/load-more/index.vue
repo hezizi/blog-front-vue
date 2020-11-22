@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     onLoadMore() {
-      this.$emit('getPageNum', ++this.page)
+      this.$emit('get-page-num', ++this.page)
     }
   },
 }
