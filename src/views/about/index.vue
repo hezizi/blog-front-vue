@@ -32,7 +32,7 @@
           <ul>
             <li v-for="link in userConfig.OTHER_LINKS" :key="link.label">
               <svg-icon :icon-name="link.icon" />
-              <a class="link" target="_blank" :href="link.link">
+              <a class="link" :href="link.link" target="_blank" rel="noopener">
                 {{ link.label }}
               </a>
             </li>
@@ -43,22 +43,34 @@
       <!-- 关于博客 -->
       <a-divider orientation="left">关于博客</a-divider>
       <div class="about mb30">
-        <p>博客申明：仅作个人学习，记录使用</p>
-        <p>源码：<a class="link" href="https://github.com/hezizi/blog-front-vue" target="_blank">Github地址</a></p>
+        <p>博客申明：作为个人记录使用，开放源码，如对你有所帮助可点击小星星以示鼓励</p>
+        <p>
+          源码：
+          <a class="link" href="https://github.com/hezizi/blog-front-vue" target="_blank" rel="noopener">Github地址</a>
+        </p>
+        <p></p>
         <div>
           <p>技术栈：</p>
           <ul>
             <li>前台：Vue2.x</li>
-            <li>管理：React Hooks</li>
-            <li>后端：Node + Express + MongoDB + Mongoose</li>
+            <li>管理端：React Hooks</li>
+            <li>服务端：Node.js + Express</li>
+            <li>数据库：MongoDB + Mongoose</li>
+            <li>服务器：阿里云</li>
           </ul>
         </div>
         <div>
           <p>后期计划：</p>
           <ul>
-            <li>前台：React Hooks + TypeScript（第二版本）</li>
-            <li>前台：Vite + Vue3 + Composition API + TypeScript（第三版本）</li>
+            <li>前台：Vue3 + Composition API + TypeScript（即将开源）</li>
+            <li>前台：React Hooks + TypeScript（第三版本）</li>
           </ul>
+        </div>
+        <div>
+          <p>
+            UI框架：
+            <a class="link" href="https://www.antdv.com/docs/vue/introduce-cn/" target="_blank" rel="noopener">Ant Design Vue 1.x</a>
+          </p>
         </div>
       </div>
     </div>
@@ -122,6 +134,7 @@ export default {
         padding-left: 25px;
         .desc {
           text-indent: 20px;
+          color: #666;
         }
         p, .sub-title {
           margin-bottom: 10px;

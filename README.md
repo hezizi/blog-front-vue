@@ -1,29 +1,11 @@
-# blog-front
+## 赫子子的博客
 
-## Project setup
-```
-yarn install
-```
+### 技术栈：
+- 前台：Vue2.x全家桶
+- 管理端：React Hooks
+- 服务端：Node.js + Express 
+- 数据库：MongoDB + Mongoose
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### UI框架
+[Ant Design Vue 1.3.15](https://www.antdv.com/docs/vue/introduce-cn/)
 
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
