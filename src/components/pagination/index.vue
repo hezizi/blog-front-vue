@@ -33,17 +33,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  /deep/ .ant-pagination-item {
-    &:hover, &:focus {
-      border-color: $themeColor;
-    }
-  }
-  /deep/ .ant-pagination-item-active {
-    border-color: $themeColor;
-    a {
-      color: $themeColor;
-    }
-  }
-</style>

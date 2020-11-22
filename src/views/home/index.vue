@@ -318,11 +318,4 @@ export default {
       }
     }
   }
-
-  /deep/ .ant-radio-checked .ant-radio-inner {
-    border-color: $themeColor;
-  }
-  /deep/ .ant-radio-inner::after {
-    background-color: $themeColor;
-  }
 </style>

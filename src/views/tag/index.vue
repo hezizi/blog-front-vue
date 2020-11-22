@@ -59,7 +59,4 @@ export default {
     }
   }
 }
-/deep/ .ant-badge-count {
-  right: -10px;
-}
 </style>

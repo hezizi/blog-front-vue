@@ -26,3 +26,7 @@ ul, ol { list-style: none; }
 ::-webkit-scrollbar-thumb:hover {
   background: #bfbfbf;
 }
+
+::selection {
+  background: $themeColor
+}

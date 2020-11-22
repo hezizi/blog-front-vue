@@ -106,7 +106,4 @@ export default {
   .comment-count {
     font-size: 20px;
   }
-  /deep/ .ant-list-split .ant-list-item {
-    border-bottom: 1px solid rgba(238, 238, 238, 0.5);
-  }
 </style>

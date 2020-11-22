@@ -105,7 +105,7 @@ export default {
     .drawer-btn {
       @include flex($align: center, $justify: center);
       position: fixed;
-      top: 150px;
+      top: 200px;
       right: 0;
       z-index: 99999;
       width: 35px;
@@ -153,20 +153,5 @@ export default {
         }
       }
     }
-  }
-  /deep/ .ant-anchor-ink {
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
-    &::before {
-      width: 1px;
-      background-color: #eee;
-    }
-    &-ball {
-      border: 2px solid $themeColor;
-    }
-  }
-  /deep/ .ant-anchor-link-active > .ant-anchor-link-title {
-    color: $themeColor;
   }
 </style>
