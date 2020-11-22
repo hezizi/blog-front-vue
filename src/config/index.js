@@ -62,7 +62,7 @@ const OTHER_LINKS = [{
  * github授权登录配置
  */
 const GITHUB = {
-  client_id: '277e5ee3373cd755fb40',
+  client_id: 'b6c0e96509a9181764bc',
   auth_url: 'https://github.com/login/oauth/authorize'
 }
 
