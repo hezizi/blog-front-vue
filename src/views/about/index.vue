@@ -43,12 +43,18 @@
       <!-- 关于博客 -->
       <a-divider orientation="left">关于博客</a-divider>
       <div class="about mb30">
-        <p>博客申明：作为个人记录使用，开放源码，如对你有所帮助可点击小星星以示鼓励</p>
+        <div class="blockquote">
+          <p>博客申明：作为个人记录使用，开放源码，如对你有所帮助可点击小星星以示鼓励</p>
+        </div>
         <p>
           源码：
           <a class="link" href="https://github.com/hezizi/blog-front-vue" target="_blank" rel="noopener">Github地址</a>
         </p>
-        <p></p>
+        <div class="blockquote">
+          <p>说明：此博客项目前前后后有一段时间，断断续续的开发，中途忙于其他事情停产了一段时间，最近开始完善和优化终于在2020.11月正式上线第一版本。</p>
+          <p>计划会开发三个版本，第二版使用 Vue3 + Ts 开发，会新增部分功能，第三版使用 React Hooks + Ts 开发，欢迎大家关注。</p>
+        </div>
+        
         <div>
           <p>技术栈：</p>
           <ul>
@@ -135,6 +141,15 @@ export default {
         .desc {
           text-indent: 20px;
           color: #666;
+        }
+        .blockquote {
+          padding: 5px 10px;
+          margin: 10px 0;
+          border-left: 4px solid rgba($themeColor, .1);
+          background-color: rgba($themeColor, .05);
+          p {
+            margin: 5px 0;
+          }
         }
         p, .sub-title {
           margin-bottom: 10px;
