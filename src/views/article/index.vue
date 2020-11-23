@@ -12,7 +12,7 @@
             <div class="title">
               <h1>{{ articleInfo.title }}</h1>
             </div>
-            <div class="meta df-aic">
+            <div class="meta df">
               <div class="avatar">
                 <a-avatar :size="50" :src="userConfig.USER_AVATAR" />
               </div>
@@ -23,7 +23,7 @@
                 <div class="meta-wrapper df-aic">
                   <span><a-icon type="clock-circle"  /> {{ articleInfo.createDate }}</span>
                   <span><a-icon type="eye" /> {{ articleInfo.views }}</span>
-                  <div class="df-aic">
+                  <div class="tags df-aic">
                     <a-icon type="tags" :style="{marginRight: '5px'}"/>
                     <a-tag v-for="tag in articleInfo.tags" :key="tag._id" :color="tagColor">{{ tag.name }}</a-tag>
                   </div>
@@ -171,6 +171,12 @@ export default {
           }
         }
         .meta-wrapper {
+          @media screen and (max-width: 480px) {
+            display: initial;
+            .tags {
+              margin-top: 5px;
+            }
+          }
           color: #666;
           & > span {
             margin-right: 10px;

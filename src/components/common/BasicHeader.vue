@@ -92,7 +92,9 @@ export default {
   },
   computed: {
     current() {
-      return this.navBarList.find(bar => bar.to === this.$route.path).name
+      const { path } = this.$route
+      const isMatch = this.navBarList.find(bar => bar.to === path)
+      return isMatch ? isMatch.name : path.includes('article') ? '详情' : '列表'
     }
   },
   watch: {

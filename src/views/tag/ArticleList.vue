@@ -45,7 +45,7 @@
               <a-icon type="eye" />
               {{ item.views }}
             </span>
-            <div class="df-aic">
+            <div class="tags df-aic">
               <a-icon
                 :style="{marginRight: '5px'}"
                 type="tags"
@@ -183,6 +183,12 @@ export default {
       margin-bottom: 10px;
     }
     .meta {
+      @media screen and (max-width: 480px) {
+        display: initial;
+        .tags {
+          margin-top: 5px;
+        }
+      }
       & > span {
         margin-right: 10px;
       }
