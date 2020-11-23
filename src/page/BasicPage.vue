@@ -22,8 +22,8 @@ export default {
 <style lang="scss" scoped>
   .basic-page {
     main {
-      @media screen and (max-width: 576px) {
-        padding: 150px 20px 35px;
+      @media screen and (min-width: 481px) and (max-width: 576px) {
+        padding-top: 150px;
       }
       @include layout;
       padding: $mainPaddingTop 20px $mainPaddingBottom;

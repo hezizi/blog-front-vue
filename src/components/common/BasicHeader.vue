@@ -10,19 +10,34 @@
 
       <div class="df-aic">
         <!-- navbar -->
-        <ul class="navbar df">
-          <li
-            v-for="item in navBarList"
-            :key="item.to"
-            :class="{ 'active': item.to === activeClass }"
-            @click="handleJump(item.to)">
-            <a-icon
-              :type="item.icon"
-              :style="{'margin-right': '3px'}" />
-            {{ item.name }}
-            <span></span>
-          </li>
-        </ul>
+        <template v-if="bodyWidth < 481">
+          <a-dropdown>
+            <a href="javascript: void(0)">{{ current }} <a-icon type="caret-down" /></a>
+            <a-menu slot="overlay">
+              <a-menu-item v-for="item in navBarList" :key="item.to">
+                <router-link :to="item.to">
+                  {{ item.name }}
+                </router-link>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown>
+        </template>
+
+        <template v-else>
+          <ul class="navbar df">
+            <li
+              v-for="item in navBarList"
+              :key="item.to"
+              :class="{ 'active': item.to === activeClass }"
+              @click="handleJump(item.to)">
+              <a-icon
+                :type="item.icon"
+                :style="{'margin-right': '3px'}" />
+              {{ item.name }}
+              <span></span>
+            </li>
+          </ul>
+        </template>
 
         <!-- github login -->
         <div class="github-login">
@@ -53,6 +68,7 @@ export default {
   name: 'Header',
   data() {
     return {
+      bodyWidth: document.body.clientWidth,
       activeClass: '',
       navBarList: [{
         name: '首页',
@@ -74,6 +90,11 @@ export default {
       githubConfig
     }
   },
+  computed: {
+    current() {
+      return this.navBarList.find(bar => bar.to === this.$route.path).name
+    }
+  },
   watch: {
     $route() {
       this.activeClass = this.$route.path
@@ -81,14 +102,23 @@ export default {
       // this.smoothscroll()
     },
   },
-  created() {
+  mounted() {
     this.activeClass = this.$route.path
+    window.addEventListener('resize', this.onresize)
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.onresize)
   },
   methods: {
+    onresize() {
+      this.bodyWidth = document.body.clientWidth
+    },
+
     handleJump(to) {
       this.activeClass = to
       this.$router.push(to)
     },
+    
     smoothscroll() {
       let currentScroll = document.documentElement.scrollTop || document.body.scrollTop
       if (currentScroll > 0) {
@@ -133,13 +163,10 @@ export default {
     background-color: #fff;
     box-shadow: 0 2px 8px #f0f1f2;
     .inner {
-      @media screen and (max-width: 576px) {
+      @media screen and (min-width: 481px) and (max-width: 576px) {
         @include flex($justify: space-around, $direction: column);
         height: 120px;
         padding-top: 10px;
-      }
-      @media screen and (max-width: 414px) {
-        padding: 10px 10px 0;
       }
       @include flex($justify: space-between, $align: center);
       @include layout;
@@ -170,10 +197,6 @@ export default {
       .navbar {
         // margin-right: 30px;
         li {
-          @media screen and (max-width: 414px) {
-            margin: 0 6px;
-            padding: 4px 6px;
-          }
           position: relative;
           margin: 0 6px;
           padding: 4px 10px;
@@ -244,8 +267,8 @@ export default {
         }
       }
       .github-login {
-        @media screen and (max-width: 414px) {
-          margin-left: 10px;
+        @media screen and (max-width: 480px) {
+          margin-left: 15px;
         }
         margin-left: 22px;
         .login-btn {

@@ -13,3 +13,4 @@ export { default as LogoutOutline } from '@ant-design/icons/lib/outline/LogoutOu
 // 文章列表以及详情部分icon
 export { default as EyeOutline } from '@ant-design/icons/lib/outline/EyeOutline'
 export { default as ClockCircleOutline } from '@ant-design/icons/lib/outline/ClockCircleOutline'
+export { default as CaretDownOutline } from '@ant-design/icons/lib/outline/CaretDownOutline'
