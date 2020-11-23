@@ -22,7 +22,7 @@
                 <svg-icon :icon-name="wx.icon" />
                 <span>{{ wx.text }}</span>
               </p>
-              <img :src="wx.img" alt="wx" :style="{height: '120px'}" />
+              <img :class="wx.icon" :src="wx.img" alt="wx" />
             </li>
           </ul>
         </div>
@@ -168,13 +168,16 @@ export default {
               }
             }
             @media screen and (max-width: 414px) {
-              img {
+              img.weixingzh {
                 height: auto;
                 width: 100%;
               }
             }
             padding-left: 0;
             list-style: none;
+            img {
+              height: 120px;
+            }
             li:first-child {
               margin-right: 80px;
             }
