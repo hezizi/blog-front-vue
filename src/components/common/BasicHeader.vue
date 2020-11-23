@@ -138,6 +138,9 @@ export default {
         height: 120px;
         padding-top: 10px;
       }
+      @media screen and (max-width: 414px) {
+        padding: 10px 10px 0;
+      }
       @include flex($justify: space-between, $align: center);
       @include layout;
       height: $headerHeight;
@@ -167,6 +170,10 @@ export default {
       .navbar {
         // margin-right: 30px;
         li {
+          @media screen and (max-width: 414px) {
+            margin: 0 6px;
+            padding: 4px 6px;
+          }
           position: relative;
           margin: 0 6px;
           padding: 4px 10px;
@@ -237,6 +244,9 @@ export default {
         }
       }
       .github-login {
+        @media screen and (max-width: 414px) {
+          margin-left: 10px;
+        }
         margin-left: 22px;
         .login-btn {
           cursor: pointer;

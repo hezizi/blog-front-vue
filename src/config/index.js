@@ -13,7 +13,7 @@ const USER_INTRODUCE = 'API 码农，码农圈中的一粒尘埃'
 // 描述
 const USER_DESC = `
   各位 coder 👨‍💻👩‍💻，欢迎来到我的博客 👏👏👏，
-  我是赫子子，三年前端开发经验，
+  我是赫子子，一名 API 码农，
   熟练掌握前端领域部分技术栈 API 的调用，目标是写 API 供他人调用；
   技术很水，正在努力让自己不那么水；
   重度音乐爱好者，音乐🎵串联我的故事；
@@ -48,12 +48,12 @@ const OTHER_LINKS = [{
   label: 'CSDN',
   icon: 'csdn',
   link: 'https://blog.csdn.net/yucihent'
-}, 
+},
 // {
 //   label: '知乎',
 //   icon: 'zhihu',
 //   link: ''
-// }, 
+// },
 {
   label: '简书',
   icon: 'jianshu',

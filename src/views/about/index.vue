@@ -51,10 +51,10 @@
           <a class="link" href="https://github.com/hezizi/blog-front-vue" target="_blank" rel="noopener">Github地址</a>
         </p>
         <div class="blockquote">
-          <p>说明：此博客项目前前后后有一段时间，断断续续的开发，中途忙于其他事情停产了一段时间，最近开始完善和优化终于在2020.11月正式上线第一版本。</p>
+          <p>说明：此博客项目前前后后有一段时间，断断续续的开发，中途忙于其他事情停产了，最近开始完善和优化于2020.11月正式上线第一版本。</p>
           <p>计划会开发三个版本，第二版使用 Vue3 + Ts 开发，会新增部分功能，第三版使用 React Hooks + Ts 开发，欢迎大家关注。</p>
         </div>
-        
+
         <div>
           <p>技术栈：</p>
           <ul>
@@ -165,6 +165,12 @@ export default {
               display: inherit;
               li:first-child {
                 margin-right: 0;
+              }
+            }
+            @media screen and (max-width: 414px) {
+              img {
+                height: auto;
+                width: 100%;
               }
             }
             padding-left: 0;
