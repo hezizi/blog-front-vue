@@ -80,7 +80,10 @@ export default {
 
 <style lang="scss" scoped>
   .achieve-page {
-    margin-top: 30px;
+    @media screen and (max-width: 480px) {
+      padding: 0 20px;
+    }
+    margin-top: 15px;
     padding: 0 60px;
     .header-year {
       position: relative;

@@ -41,11 +41,14 @@ export default {
 
 <style lang="scss" scoped>
 .tag-page {
-  margin-top: 30px;
-  padding: 0 60px;
   @media screen and (max-width: 576px) {
     padding: 0;
   }
+  @media screen and (max-width: 480px) {
+    margin-top: 0;
+  }
+  margin-top: 15px;
+  padding: 0 60px;
   ul {
     @include flex($justify: center);
     flex-wrap: wrap;

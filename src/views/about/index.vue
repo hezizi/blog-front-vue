@@ -68,8 +68,8 @@
         <div>
           <p>后期计划：</p>
           <ul>
-            <li>前台：Vue3 + Composition API + TypeScript（即将开源）</li>
-            <li>前台：React Hooks + TypeScript（第三版本）</li>
+            <li>前台：Vue3 + Composition API + TypeScript（第二版即将开源）</li>
+            <li>前台：React Hooks + TypeScript（第三版）</li>
           </ul>
         </div>
         <div>
