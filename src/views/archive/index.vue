@@ -1,6 +1,6 @@
 <template>
   <div class="achieve-page">
-    <fetch-loading ref="fetch">
+    <!-- <fetch-loading ref="fetch"> -->
       <a-timeline>
         <template v-for="(list, i) in newList">
           <a-timeline-item
@@ -24,11 +24,12 @@
           </a-timeline-item>
         </template>
       </a-timeline>
-    </fetch-loading>
+    <!-- </fetch-loading> -->
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import FetchLoading from '@/components/loading'
 import { articleList } from '@/services/api'
 import { themeColor } from '@/assets/styles/variables.scss'
@@ -40,41 +41,51 @@ export default {
   },
   data() {
     return {
-      pageNum: 1,
-      pageSize: 20,
+      // pageNum: 1,
+      // pageSize: 20,
+      // articlesList: [],
 
-      articlesList: [],
       newList: [],
-
       color: themeColor,
     }
   },
+  computed: {
+    ...mapGetters(['allPosts'])
+  },
   mounted() {
-    this.getAllArticle()
+    this.getAllPosts()
   },
   methods: {
-    async getAllArticle() {
-      this.$refs['fetch'].fetchData({
-        api: articleList,
-        params: {
-          pageNum: this.pageNum,
-          pageSize: this.pageSize
-        },
-        withLoading: true,
-        handleFn: result => {
-          this.articlesList = result.data
-
-          const dateObj = {}
-          this.articlesList.map(item => {
-            const year = item.create_time.slice(0, 4)
-            dateObj[year] = dateObj[year] || []
-            dateObj[year].push(item)
-          })
-          this.newList = Object.keys(dateObj).map(group => dateObj[group])
-        }
+    async getAllPosts() {
+      const dateObj = {}
+      this.allPosts.map(item => {
+        const year = item.create_time.slice(0, 4)
+        dateObj[year] = dateObj[year] || []
+        dateObj[year].push(item)
       })
-    },
-  },
+      this.newList = Object.keys(dateObj).map(group => dateObj[group])
+
+      // this.$refs['fetch'].fetchData({
+      //   api: articleList,
+      //   params: {
+      //     pageNum: this.pageNum,
+      //     pageSize: this.pageSize
+      //   },
+      //   withLoading: true,
+      //   handleFn: result => {
+      //     this.articlesList = result.data
+
+      //     const dateObj = {}
+      //     this.articlesList.map(item => {
+      //       const year = item.create_time.slice(0, 4)
+      //       dateObj[year] = dateObj[year] || []
+      //       dateObj[year].push(item)
+      //     })
+      //     this.newList = Object.keys(dateObj).map(group => dateObj[group])
+      //   }
+      // })
+    }
+  }
 }
 </script>
 
