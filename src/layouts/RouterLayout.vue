@@ -1,7 +1,7 @@
 <template>
   <transition name="router" mode="out-in">
     <template v-if="keepAliveRouter">
-      <keep-alive> 
+      <keep-alive>
         <router-view />
       </keep-alive>
     </template>
@@ -17,7 +17,7 @@ export default {
   name: 'RouterLayout',
   computed: {
     keepAliveRouter() {
-      const { keepAlive = true } = this.$route.meta
+      const { keepAlive = false } = this.$route.meta
       return keepAlive
     }
   }

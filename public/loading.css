@@ -8,8 +8,10 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  color: #fff;
   background-color: rgb(152, 191, 246);
+}
+.loading h3 {
+  color: #fff;
 }
 .jumping {
   position: relative;

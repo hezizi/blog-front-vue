@@ -2,7 +2,7 @@
   <div class="achieve-page">
     <!-- <fetch-loading ref="fetch"> -->
       <a-timeline>
-        <template v-for="(list, i) in newList">
+        <template v-for="(list, i) in newPostList">
           <a-timeline-item
             :key="i"
             :color="color"
@@ -44,27 +44,27 @@ export default {
       // pageNum: 1,
       // pageSize: 20,
       // articlesList: [],
-
-      newList: [],
-      color: themeColor,
+      // newList: [],
+      color: themeColor
     }
   },
   computed: {
-    ...mapGetters(['allPosts'])
-  },
-  mounted() {
-    this.getAllPosts()
-  },
-  methods: {
-    async getAllPosts() {
+    ...mapGetters(['allPosts']),
+    newPostList() {
       const dateObj = {}
       this.allPosts.map(item => {
         const year = item.create_time.slice(0, 4)
         dateObj[year] = dateObj[year] || []
         dateObj[year].push(item)
       })
-      this.newList = Object.keys(dateObj).map(group => dateObj[group])
-
+      return Object.keys(dateObj).map(group => dateObj[group])
+    }
+  },
+  mouted() {
+    // this.getAllPosts()
+  },
+  methods: {
+    async getAllPosts() {
       // this.$refs['fetch'].fetchData({
       //   api: articleList,
       //   params: {

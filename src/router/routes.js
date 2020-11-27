@@ -7,10 +7,7 @@ export default [{
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/home'),
-      meta: {
-        keepAlive: false
-      }
+      component: () => import('@/views/home')
     }, {
       // 文章详情
       path: '/article/:articleId',
@@ -21,8 +18,7 @@ export default [{
         breadcrumb: {
           title: '文章',
           link: '/archive'
-        },
-        keepAlive: false
+        }
       }
     }, {
       // 标签
@@ -39,26 +35,28 @@ export default [{
         breadcrumb: {
           title: '标签',
           link: '/tags'
-        },
-        keepAlive: false
+        }
       }
     }, {
       // 归档
       path: '/archive',
       name: 'archive',
-      component: () => import('@/views/archive')
+      component: () => import('@/views/archive'),
+      meta: {
+        keepAlive: true
+      }
     }, {
       // 关于
       path: '/about',
       name: 'about',
-      component: () => import('@/views/about')
+      component: () => import('@/views/about'),
+      meta: {
+        keepAlive: true
+      }
     }, {
       path: '/auth',
       name: 'auth',
-      component: () => import('@/components/github-auth'),
-      meta: {
-        keepAlive: false
-      }
+      component: () => import('@/components/github-auth')
     }
   ]
 }, {
