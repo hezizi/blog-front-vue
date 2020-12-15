@@ -1,7 +1,7 @@
 <template>
   <footer class="footer-wrapper w100">
     <h4>Yucihzz'Blog ©{{ date }} Created by 赫子子</h4>
-    <a class="link" target="_blank" href="http://www.beian.miit.gov.cn" rel="noopener">鄂ICP备20004755号-1</a>
+    <a class="link" target="_blank" href="http://beian.miit.gov.cn" rel="noopener">鄂ICP备20004755号-1</a>
   </footer>
 </template>
 
