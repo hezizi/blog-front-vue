@@ -19,6 +19,7 @@
   height: 36px;
   border: 2px #fff solid;
   border-radius: 4px;
+  box-sizing: content-box;
   -webkit-animation: charge 2s linear infinite;
   -moz-animation: charge 2s linear infinite;
   animation: charge 2s linear infinite;
@@ -29,7 +30,7 @@
   top: 5px;
   right: -16px;
   width: 10px;
-  height: 25px;
+  height: 26px;
   background-color: #fff;
   border-radius: 2px;
 }
