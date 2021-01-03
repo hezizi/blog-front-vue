@@ -81,10 +81,9 @@ message.config({
 })
 
 import VueLazyload from 'vue-lazyload'
-import loading from './assets/images/loading.gif'
 Vue.use(VueLazyload, {
   // error: 'dist/error.png',
-  loading
+  loading: require('./assets/images/loading.gif')
 })
 
 // 全局注册SvgIcon组件
