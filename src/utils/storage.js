@@ -1,9 +1,9 @@
 import Cookie from 'js-cookie'
 
 // 存
-const expires = new Date(new Date().getTime() + 10 * 60 * 1000)  // 10min
+const expires = new Date(new Date().getTime() + 5 * 60 * 1000)  // 5min
 export const setStorage = (key, val) => {
-  Cookie.set(key, val instanceof Object ? JSON.stringify(val) : val, expires)
+  Cookie.set(key, val instanceof Object ? JSON.stringify(val) : val, { expires })
 }
 
 // 取
@@ -14,8 +14,7 @@ export const getStorage = key => {
   }
 }
 
-// 删除
+// 删
 export const removeStorage = key => {
-  // localStorage.removeItem(key)
   Cookie.remove(key)
 }
