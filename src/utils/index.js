@@ -2,6 +2,10 @@ import marked from 'marked'
 import hljs from 'highlight'
 import dayjs from 'dayjs'
 import { message } from 'ant-design-vue'
+message.config({
+  duration: 1.5,
+  maxCount: 3,  // 最多显示3个
+})
 
 /* markdown转html */
 export const markdownToHtml = markdown => marked(markdown, {

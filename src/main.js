@@ -43,8 +43,7 @@ import {
   Modal,
   Menu,
   Dropdown,
-  Drawer,
-  message
+  Drawer
 } from 'ant-design-vue'
 
 Vue.use(BackTop)
@@ -74,11 +73,6 @@ Vue.use(Menu)
 Vue.use(Dropdown)
 Vue.use(Drawer)
 Vue.prototype.$confirm = Modal.confirm
-Vue.prototype.$message = message
-message.config({
-  duration: 1.5,
-  maxCount: 3,  // 最多显示3个
-})
 
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
